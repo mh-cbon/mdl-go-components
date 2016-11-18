@@ -24,11 +24,11 @@ func TestDup(t *testing.T) {
 
 	bt = components.NewButton()
 	bt.SetLabel("hello duped bt!")
-  dup.SetDup(bt)
+	dup.SetDup(bt)
 
 	expectations := []string{
 		`<div\s+id="id"\s+class="custom-dup custom-js-dup\s+"\s+>`,
-    `<div class="custom-dup-template">\s+<div class="custom-dup-item">\s+<div class="custom-dup-component">\s+<button[^>]+id="id-0-[$]incrIndex[$]"`,
+		`<div class="custom-dup-template">\s+<div class="custom-dup-item">\s+<div class="custom-dup-component">\s+<button[^>]+id="id-0-[$]incrIndex[$]"`,
 		`<div class="custom-dup-container">\s+<div class="custom-dup-item">\s+<div class="custom-dup-component">\s+<button[^>]+id="rnd-1"`,
 		`<button type="button"\s+id="id-0-[$]incrIndex[$]"[^>]+>hello duped bt!</button>`,
 		`<button[^>]+>\s+less\s+</button>`,
@@ -56,14 +56,14 @@ func TestDupSliceDuped(t *testing.T) {
 	bt.SetLabel("hello bt3!")
 	dup.Add(bt)
 
-  sl := components.NewSlice()
+	sl := components.NewSlice()
 	txt := components.NewInputText()
 	txt.SetLabel("hello duped bt!")
-  sl.Add(txt)
+	sl.Add(txt)
 	txt = components.NewInputText()
 	txt.SetLabel("hello duped bt!2")
-  sl.Add(txt)
-  dup.SetDup(sl)
+	sl.Add(txt)
+	dup.SetDup(sl)
 
 	expectations := []string{
 		`<input\s+id="id-0-[$]incrIndex[$]"\s+class="mdl-textfield__input "[^>]+>`,

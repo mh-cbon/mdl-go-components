@@ -1,4 +1,4 @@
-{{define "form_checkbox_slice"}}
+{{define "mgc/form_checkbox_slice"}}
 <div class="custom-{{.Component.GetType}}-slice">
     {{range $i, $v := .Component.GetOptions}}
       {{$.Component.RenderItem $i $v}}

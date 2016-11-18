@@ -11,15 +11,15 @@ func TestDialog(t *testing.T) {
 	dialog.SetTitle("The title")
 	dialog.SetId("id")
 
-  dialog.SetOkText("OkText", "")
-  dialog.SetOkAttr("type", "submit")
-  dialog.SetOkAttr("form", "form1")
+	dialog.SetOkText("OkText", "")
+	dialog.SetOkAttr("type", "submit")
+	dialog.SetOkAttr("form", "form1")
 
-  dialog.SetCancelText("CancelText", "")
-  dialog.SetCancelAttr("a", "b")
+	dialog.SetCancelText("CancelText", "")
+	dialog.SetCancelAttr("a", "b")
 
-  dialog.SetCloseText("CloseText", "")
-  dialog.SetCloseAttr("c", "d")
+	dialog.SetCloseText("CloseText", "")
+	dialog.SetCloseAttr("c", "d")
 
 	text := components.NewText()
 	text.SetContent("hello content!")

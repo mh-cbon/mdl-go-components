@@ -75,7 +75,6 @@ func TestCheckboxSliceWithValues(t *testing.T) {
 	expectations := []string{
 		`<input[^>]+type="checkbox"[^>]+value="valueopt"\s+class="mdl-checkbox__input\s+"\s+/>`,
 		`<input[^>]+type="checkbox"[^>]+value="value2"[^>]+checked="checked"[^>]+>`,
-
 	}
 	validateComponent(t, input, expectations)
 }

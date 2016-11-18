@@ -7,8 +7,8 @@ import (
 
 func TestDataTable(t *testing.T) {
 
-  var header *components.DataTableHeader
-  var row *components.DataTableRow
+	var header *components.DataTableHeader
+	var row *components.DataTableRow
 	input := components.NewDataTable()
 	header = input.SetHeader("id", "id")
 	header.SetNumeric(true)

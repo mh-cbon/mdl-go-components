@@ -19,8 +19,8 @@ type CheckboxSlice struct {
 
 func NewCheckboxSlice() *CheckboxSlice {
 	ret := &CheckboxSlice{}
-	ret.SetBlock("form_checkbox_slice")
-	ret.SetItemBlock("form_checkbox")
+	ret.SetBlock("mgc/form_checkbox_slice")
+	ret.SetItemBlock("mgc/form_checkbox")
 	ret.SetType("checkbox")
 	return ret
 }
@@ -28,7 +28,7 @@ func NewCheckboxSlice() *CheckboxSlice {
 func NewRadioSlice() *CheckboxSlice {
 	ret := NewCheckboxSlice()
 	ret.SetType("radio")
-	ret.SetItemBlock("form_radio")
+	ret.SetItemBlock("mgc/form_radio")
 	return ret
 }
 
@@ -67,7 +67,7 @@ func (view *CheckboxSlice) GetItem(index int, option NodeOption) *Checkbox {
 	sview.SetBlock(view.GetItemBlock())
 	sview.SetOption(option)
 	sview.SetChecked(view.HasValue(option.GetValue()))
-  view.GetRenderContext().SetDefaultTo(sview)
+	view.GetRenderContext().SetDefaultTo(sview)
 	return sview
 }
 

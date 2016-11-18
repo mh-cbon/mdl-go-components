@@ -13,7 +13,7 @@ type Form struct {
 
 func NewForm() *Form {
 	ret := &Form{}
-	ret.SetBlock("form")
+	ret.SetBlock("mgc/form")
 	return ret
 }
 

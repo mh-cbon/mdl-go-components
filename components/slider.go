@@ -19,7 +19,7 @@ type Slider struct {
 
 func NewSlider() *Slider {
 	ret := &Slider{}
-	ret.SetBlock("form_slider")
+	ret.SetBlock("mgc/form_slider")
 	ret.SetType("range")
 	return ret
 }

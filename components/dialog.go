@@ -31,7 +31,7 @@ func NewDialog() *Dialog {
 	ret.Close = NewButton()
 	ret.SetCloseText("", "close")
 	ret.Close.Classes.Add("custom-dialog-close")
-	ret.SetBlock("component_dialog")
+	ret.SetBlock("mgc/component_dialog")
 	return ret
 }
 
@@ -59,7 +59,7 @@ func (view *Dialog) SetOkText(t string, icon string) {
 	}
 }
 func (view *Dialog) SetOkAttr(t string, v string) {
-  view.Ok.Attr.Set(t, v)
+	view.Ok.Attr.Set(t, v)
 }
 
 func (view *Dialog) SetCancelText(t string, icon string) {
@@ -70,7 +70,7 @@ func (view *Dialog) SetCancelText(t string, icon string) {
 	}
 }
 func (view *Dialog) SetCancelAttr(t string, v string) {
-  view.Cancel.Attr.Set(t, v)
+	view.Cancel.Attr.Set(t, v)
 }
 
 func (view *Dialog) SetCloseText(t string, icon string) {
@@ -81,7 +81,7 @@ func (view *Dialog) SetCloseText(t string, icon string) {
 	}
 }
 func (view *Dialog) SetCloseAttr(t string, v string) {
-  view.Close.Attr.Set(t, v)
+	view.Close.Attr.Set(t, v)
 }
 
 func (view *Dialog) Render(args ...interface{}) (string, error) {

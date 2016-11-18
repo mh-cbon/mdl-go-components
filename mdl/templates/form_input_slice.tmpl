@@ -1,4 +1,4 @@
-{{define "form_input_slice"}}
+{{define "mgc/form_input_slice"}}
   {{range $i, $v := .Component.GetValues}}
     {{$.Component.RenderItem $i $v}}
   {{end}}

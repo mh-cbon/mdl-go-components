@@ -15,7 +15,7 @@ type CheckIcon struct {
 
 func NewCheckIcon() *CheckIcon {
 	ret := &CheckIcon{}
-	ret.SetBlock("form_checkicon")
+	ret.SetBlock("mgc/form_checkicon")
 	return ret
 }
 

@@ -16,14 +16,14 @@ type Textarea struct {
 
 func NewTextarea() *Textarea {
 	ret := &Textarea{}
-	ret.SetBlock("form_textarea")
+	ret.SetBlock("mgc/form_textarea")
 	ret.SetRows(3)
 	return ret
 }
 
 func NewWysiwyg() *Textarea {
 	ret := NewTextarea()
-	ret.SetBlock("form_wysiwyg")
+	ret.SetBlock("mgc/form_wysiwyg")
 	return ret
 }
 

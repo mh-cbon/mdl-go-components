@@ -12,7 +12,7 @@ type Text struct {
 
 func NewText() *Text {
 	ret := &Text{}
-	ret.SetBlock("text_node")
+	ret.SetBlock("mgc/text_node")
 	return ret
 }
 

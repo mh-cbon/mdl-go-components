@@ -15,7 +15,7 @@ type Tabs struct {
 
 func NewTabs() *Tabs {
 	ret := &Tabs{}
-	ret.SetBlock("tabs")
+	ret.SetBlock("mgc/tabs")
 	return ret
 }
 

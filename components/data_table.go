@@ -20,7 +20,7 @@ type DataTable struct {
 
 func NewDataTable() *DataTable {
 	ret := &DataTable{}
-	ret.SetBlock("data_table")
+	ret.SetBlock("mgc/data_table")
 	return ret
 }
 func (view *DataTable) Render(args ...interface{}) (string, error) {

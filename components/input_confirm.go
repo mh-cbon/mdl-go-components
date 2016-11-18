@@ -19,7 +19,7 @@ type InputConfirm struct {
 
 func NewInputConfirm() *InputConfirm {
 	ret := &InputConfirm{}
-	ret.SetBlock("form_input_confirm")
+	ret.SetBlock("mgc/form_input_confirm")
 	ret.InputLeft = &PartialInputConfirm{}
 	ret.InputRight = &PartialInputConfirm{}
 	return ret

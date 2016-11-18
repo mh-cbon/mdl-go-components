@@ -19,7 +19,7 @@ type Select struct {
 
 func NewSelect() *Select {
 	ret := &Select{}
-	ret.SetBlock("form_select")
+	ret.SetBlock("mgc/form_select")
 	return ret
 }
 

@@ -20,27 +20,25 @@ type Input struct {
 
 func NewInput() *Input {
 	ret := &Input{}
-	ret.SetBlock("form_input")
+	ret.SetBlock("mgc/form_input")
 	return ret
 }
 
 func NewInputText() *Input {
 	ret := NewInput()
-	ret.SetBlock("form_input")
 	ret.SetType("text")
 	return ret
 }
 
 func NewInputHidden() *Input {
 	ret := NewInput()
-	ret.SetBlock("form_hidden")
+	ret.SetBlock("mgc/form_hidden")
 	ret.SetType("hidden")
 	return ret
 }
 
 func NewInputPassword() *Input {
 	ret := NewInput()
-	ret.SetBlock("form_input")
 	ret.SetType("password")
 	return ret
 }

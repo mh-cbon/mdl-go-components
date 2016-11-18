@@ -1,18 +1,3 @@
-# mdl-go-components
-
-[![GoDoc](https://godoc.org/github.com/mh-cbon/mdl-go-components?status.svg)](https://godoc.org/github.com/mh-cbon/mdl-go-components)
-
-Material Design Lite components intergration for Go
-
-## Install
-
-```sh
-glide get github.com/mh-cbon/mdl-go-components
-```
-
-## Usage
-
-```go
 package mdlgocomponents_test
 
 import (
@@ -50,7 +35,6 @@ func Example_main() {
 		panic(err)
 	}
 
-  // when suitable, components can be nested with the type
-  // mgc.ViewComponentRenderer see tabs, dup, form ect.
+	// when suitable, components can be nested with the type
+	// mgc.ViewComponentRenderer see tabs, dup, form ect.
 }
-```

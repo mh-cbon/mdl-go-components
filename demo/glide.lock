@@ -1,0 +1,10 @@
+hash: 5a63ab4cc19b307c93dc316a868f4a5bdeef3e5cdd4d28d0bcf9ce815be41b1e
+updated: 2016-11-18T22:35:56.341456425+01:00
+imports:
+- name: github.com/mh-cbon/mainpath
+  version: df2155b738dd0f6469c9403f218728def673421e
+- name: github.com/mh-cbon/this-path
+  version: cabd3e4b715946c0152b4172d71355c28b8fe7d5
+- name: github.com/vincent-petithory/dataurl
+  version: 9a301d65acbb728fcc3ace14f45f511a4cfeea9c
+testImports: []

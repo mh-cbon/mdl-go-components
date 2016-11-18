@@ -18,7 +18,7 @@ type Expand struct {
 
 func NewExpand() *Expand {
 	ret := &Expand{}
-	ret.SetBlock("component_expand")
+	ret.SetBlock("mgc/component_expand")
 	return ret
 }
 

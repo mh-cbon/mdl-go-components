@@ -22,7 +22,7 @@ type InputFile struct {
 
 func NewInputFile() *InputFile {
 	ret := &InputFile{}
-	ret.SetBlock("form_input_file")
+	ret.SetBlock("mgc/form_input_file")
 	ret.SetAttachIcon("attach_file")
 	ret.SetClearIcon("clear")
 	return ret

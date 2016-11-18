@@ -1,4 +1,4 @@
-{{define "button"}}
+{{define "mgc/button"}}
 {{if .Component.Attr.GetValue "href"}}
   <a {{range .Component.Attr}}{{.Render}} {{end}}
     class="{{.Component.Classes.Render}}"

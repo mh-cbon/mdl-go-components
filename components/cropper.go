@@ -33,7 +33,7 @@ func NewCropper() *Cropper {
 		InputFile:   NewInputFile(),
 		Dialog:      NewDialog(),
 	}
-	ret.SetBlock("cropper")
+	ret.SetBlock("mgc/cropper")
 	ret.SetResultMode("base64")
 	ret.Dialog.Classes.Add("custom-cropper-dialog")
 	Content := NewText()
@@ -50,9 +50,9 @@ func NewCropper() *Cropper {
 }
 
 func (view *Cropper) Render(args ...interface{}) (string, error) {
-  view.GetRenderContext().SetDefaultTo(view.InputHidden)
-  view.GetRenderContext().SetDefaultTo(view.InputFile)
-  view.GetRenderContext().SetDefaultTo(view.Dialog)
+	view.GetRenderContext().SetDefaultTo(view.InputHidden)
+	view.GetRenderContext().SetDefaultTo(view.InputFile)
+	view.GetRenderContext().SetDefaultTo(view.Dialog)
 	return view.GetRenderContext().RenderComponent(view, args)
 }
 

@@ -30,7 +30,7 @@ func TestCropperGeometry(t *testing.T) {
 	input.SetResultMode("geometry")
 
 	expectations := []string{
-  `<input\s+class="custom-cropper-data-result"\s+type="hidden"\s+name=""\s+value=""\s+/>`,
+		`<input\s+class="custom-cropper-data-result"\s+type="hidden"\s+name=""\s+value=""\s+/>`,
 	}
 	validateComponent(t, input, expectations)
 }

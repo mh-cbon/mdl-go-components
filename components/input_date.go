@@ -23,7 +23,7 @@ type InputDate struct {
 func NewInputDate() *InputDate {
 	ret := &InputDate{}
 	ret.SetGoFormat(time.RFC3339)
-	ret.SetBlock("form_date")
+	ret.SetBlock("mgc/form_date")
 	return ret
 }
 

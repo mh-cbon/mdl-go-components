@@ -13,7 +13,7 @@ import (
 
 func main() {
 
-  handlers.SetRoutes()
+	handlers.SetRoutes()
 
 	fs := http.FileServer(http.Dir(mainpath.DirToMain()))
 	http.Handle("/static/", http.StripPrefix("/", fs))

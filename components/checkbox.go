@@ -15,7 +15,7 @@ type Checkbox struct {
 
 func NewCheckbox() *Checkbox {
 	ret := &Checkbox{}
-	ret.SetBlock("form_checkbox")
+	ret.SetBlock("mgc/form_checkbox")
 	ret.SetType("checkbox")
 	return ret
 }
@@ -23,14 +23,14 @@ func NewCheckbox() *Checkbox {
 func NewRadio() *Checkbox {
 	ret := NewCheckbox()
 	ret.SetType("radio")
-	ret.SetBlock("form_radio")
+	ret.SetBlock("mgc/form_radio")
 	return ret
 }
 
 func NewSwitch() *Checkbox {
 	ret := NewCheckbox()
 	ret.SetType("checkbox")
-	ret.SetBlock("form_switch")
+	ret.SetBlock("mgc/form_switch")
 	return ret
 }
 

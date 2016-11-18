@@ -8,13 +8,13 @@ import (
 func TestTab(t *testing.T) {
 	tabs := components.NewTabs()
 
-  text := components.NewText()
-  text.SetContent("hello content!")
-  tabs.Add("tab1", text)
+	text := components.NewText()
+	text.SetContent("hello content!")
+	tabs.Add("tab1", text)
 
-  text = components.NewText()
-  text.SetContent("hello content!")
-  tabs.Add("tab2", text)
+	text = components.NewText()
+	text.SetContent("hello content!")
+	tabs.Add("tab2", text)
 
 	expectations := []string{
 		`<div\s+id="rnd-2"\s+class="mdl-tabs mdl-js-tabs mdl-js-ripple-effect\s+"\s+>`,
@@ -29,15 +29,15 @@ func TestTab(t *testing.T) {
 func TestTabSetActive(t *testing.T) {
 	tabs := components.NewTabs()
 
-  text := components.NewText()
-  text.SetContent("hello content!")
-  tabs.Add("tab1", text)
+	text := components.NewText()
+	text.SetContent("hello content!")
+	tabs.Add("tab1", text)
 
-  text = components.NewText()
-  text.SetContent("hello content!")
-  tabs.Add("tab2", text)
+	text = components.NewText()
+	text.SetContent("hello content!")
+	tabs.Add("tab2", text)
 
-  tabs.SetActive(1)
+	tabs.SetActive(1)
 
 	expectations := []string{
 		`<div\s+id="rnd-2"\s+class="mdl-tabs mdl-js-tabs mdl-js-ripple-effect\s+"\s+>`,

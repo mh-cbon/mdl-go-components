@@ -24,12 +24,12 @@ func NewChipAutocomplete() *ChipAutocomplete {
 	ret := &ChipAutocomplete{
 		Input: NewInputText(),
 	}
-	ret.SetBlock("chip_autocomplete")
+	ret.SetBlock("mgc/chip_autocomplete")
 	return ret
 }
 
 func (view *ChipAutocomplete) Render(args ...interface{}) (string, error) {
-  view.GetRenderContext().SetDefaultTo(view.Input)
+	view.GetRenderContext().SetDefaultTo(view.Input)
 	return view.GetRenderContext().RenderComponent(view, args)
 }
 

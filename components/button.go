@@ -16,7 +16,7 @@ type Button struct {
 
 func NewButton() *Button {
 	ret := &Button{}
-	ret.SetBlock("button")
+	ret.SetBlock("mgc/button")
 	ret.SetType("button")
 	ret.Classes.Add("mdl-button mdl-js-button")
 	return ret

@@ -25,31 +25,26 @@ func (i *InputSlice) GetItemBlock() string {
 
 func NewInputSlice() *InputSlice {
 	ret := &InputSlice{}
-	ret.SetBlock("form_input_slice")
-	ret.SetItemBlock("form_input")
+	ret.SetBlock("mgc/form_input_slice")
+	ret.SetItemBlock("mgc/form_input")
 	return ret
 }
 
 func NewInputTextSlice() *InputSlice {
 	ret := NewInputSlice()
-	ret.SetBlock("form_input_slice")
-	ret.SetItemBlock("form_input")
 	ret.SetType("text")
 	return ret
 }
 
 func NewInputPasswordSlice() *InputSlice {
 	ret := NewInputSlice()
-	ret.SetBlock("form_input_slice")
-	ret.SetItemBlock("form_input")
 	ret.SetType("password")
 	return ret
 }
 
 func NewInputHiddenSlice() *InputSlice {
 	ret := NewInputSlice()
-	ret.SetBlock("form_input_slice")
-	ret.SetItemBlock("form_hidden")
+	ret.SetItemBlock("mgc/form_hidden")
 	ret.SetType("hidden")
 	return ret
 }
