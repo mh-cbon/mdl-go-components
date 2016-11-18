@@ -1,0 +1,5 @@
+package: github.com/mh-cbon/mdl-go-components/demo
+import:
+- package: github.com/mh-cbon/mainpath
+- package: github.com/mh-cbon/mdl-go-components
+- package: github.com/vincent-petithory/dataurl

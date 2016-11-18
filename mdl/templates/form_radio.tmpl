@@ -1,0 +1,15 @@
+{{define "form_radio"}}
+  <label
+  {{range .Component.Attr}}{{.Render}} {{end}}
+  class="mdl-radio mdl-js-radio {{.Component.Classes.Render}}"
+  for="{{.Component.GetId}}">
+    <input
+    {{range .Component.InputAttr}}{{.Render}}{{end}}
+    type="{{.Component.GetType}}"
+    {{if .Component.Option.GetValue}}value="{{.Component.Option.GetValue}}"{{end}}
+    class="mdl-radio__button {{.Component.InputClasses.Render}}"
+    {{if .Component.Option.IsChecked}}checked="checked"{{end}}
+    />
+    <span class="mdl-radio__label">{{.Component.Option.GetLabel}}</span>
+  </label>
+{{end}}

@@ -1,0 +1,23 @@
+{{define "cropper"}}
+<div
+  {{range .Component.Attr}}{{.Render}} {{end}}
+  class="custom-cropper custom-js-cropper
+  {{.Component.Classes.Render}}"
+  >
+
+  {{if .Component.GetCurrentImg}}
+  <div
+    {{range .Component.CurrentImgAttr}}{{.Render}} {{end}}
+    class="custom-cropper-current-img {{.Component.CurrentImgClasses.Render}}">
+    <img src="{{.Component.GetCurrentImg}}" />
+  </div>
+  {{end}}
+
+  {{.Component.InputHidden.Render}}
+
+  {{.Component.InputFile.Render}}
+
+  {{.Component.Dialog.Render}}
+
+</div>
+{{end}}

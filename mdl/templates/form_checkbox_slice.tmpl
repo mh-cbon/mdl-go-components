@@ -1,0 +1,8 @@
+{{define "form_checkbox_slice"}}
+<div class="custom-{{.Component.GetType}}-slice">
+    {{range $i, $v := .Component.GetOptions}}
+      {{$.Component.RenderItem $i $v}}
+    {{end}}
+  <span class="mdl-textfield__error">{{.Component.GetError}}</span>
+</div>
+{{end}}

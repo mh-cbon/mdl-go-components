@@ -1,0 +1,20 @@
+{{define "component_dialog"}}
+<div class="custom-js-dialog custom-dialog {{.Component.Classes.Render}}"
+  {{range .Component.Attr}}{{.Render}}{{end}}
+  >
+  <div class="custom-dialog-bg {{.Component.BgClasses.Render}}"></div>
+  <div class="custom-dialog-container {{.Component.ContainerClasses.Render}}">
+    <h4 class="mdl-dialog__title">{{.Component.Title}}</h4>
+    <div class="mdl-dialog__content">
+      {{if .Component.Content}}
+        {{.Component.Content.Render}}
+      {{end}}
+    </div>
+    <div class="mdl-dialog__actions">
+      {{.Component.Ok.Render}}
+      {{.Component.Cancel.Render}}
+    </div>
+    {{.Component.Close.Render}}
+  </div>
+</div>
+{{end}}

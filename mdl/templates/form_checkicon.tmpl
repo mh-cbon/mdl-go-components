@@ -1,0 +1,15 @@
+{{define "form_checkicon"}}
+  <label
+  {{range .Component.Attr}}{{.Render}} {{end}}
+  class="mdl-icon-toggle mdl-js-icon-toggle {{.Component.Classes.Render}}"
+  for="{{.Component.GetId}}">
+    <input
+    {{range .Component.InputAttr}}{{.Render}}{{end}}
+    type="checkbox"
+    {{if .Component.Option.GetValue}}value="{{.Component.Option.GetValue}}"{{end}}
+    class="mdl-icon-toggle__input {{.Component.InputClasses.Render}}"
+    {{if .Component.Option.IsChecked}}checked="checked"{{end}}
+    />
+    <i class="mdl-icon-toggle__label material-icons">{{.Component.Icon}}</i>
+  </label>
+{{end}}

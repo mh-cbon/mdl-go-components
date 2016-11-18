@@ -1,0 +1,17 @@
+{{define "component_expand"}}
+<div class="custom-js-expander custom-expander
+  {{if .Component.IsExpanded}}is-expanded{{end}}
+  ">
+
+  <div class="custom-expander-bt">
+    {{.Component.Bt.Render}}
+  </div>
+
+  <div class="custom-expander-container">
+    {{range .Component.Children}}
+      {{.Render}}
+    {{end}}
+  </div>
+
+</div>
+{{end}}

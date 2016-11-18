@@ -1,0 +1,9 @@
+{{define "form"}}
+  <form
+    {{range .Component.Attr}}{{.Render}} {{end}}
+    class="{{.Component.Classes.Render}}">
+    {{range .Component.Components}}
+      {{.Render}}
+    {{end}}
+  </form>
+{{end}}

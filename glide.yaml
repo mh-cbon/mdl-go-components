@@ -1,0 +1,4 @@
+package: github.com/mh-cbon/mdl-go-components
+import:
+- package: github.com/mh-cbon/this-path
+  version: ^0.0.1

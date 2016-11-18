@@ -1,0 +1,52 @@
+{{define "data_table"}}
+  {{if not (len .Component.Rows)}}
+    {{.Component.Empty.Render}}
+  {{else}}
+    <table
+    {{range .Component.Attr}}{{.Render}}{{end}}
+    class="mdl-data-table custom-js-data-table custom-data-table mdl-shadow--2dp {{.Component.Classes.Render}}"
+    >
+      <thead>
+        <tr>
+          {{range .Component.Headers}}
+          <th class="{{.Classes.Render}}"
+          {{range .Attr}}{{.Render}}{{end}}
+          >
+          {{if .IsSortable}}
+            <a href="?{{.GetNextSortdirParam "sort"}}">
+              {{if not .GetSortdir}}
+                <i class='material-icons'>{{.SortIcon}}</i>
+              {{end}}
+              {{.CellTxt}}
+            </a>
+          {{else}}
+            {{.CellTxt}}
+          {{end}}
+          </th>
+          {{end}}
+        </tr>
+      </thead>
+      <tbody>
+        {{range .Component.Rows}}
+        <tr class="{{.Classes.Render}}"
+          {{range .Attr}}{{.Render}}{{end}}
+          {{if .GetValue}}value="{{.GetValue}}"{{end}}>
+          {{range .Cells}}
+            <td  class="{{.Classes.Render}}"
+              {{range .Attr}}{{.Render}}{{end}}
+            >
+            {{if .LinkIcon}}
+              <a href="{{.CellTxt}}" target="_blank">
+                <i class="material-icons">{{(.LinkIcon)}}</i>
+              </a>
+            {{else}}
+              {{.CellTxt}}
+            {{end}}</td>
+          {{end}}
+        </tr>
+        {{end}}
+        </tr>
+      </tbody>
+    </table>
+  {{end}}
+{{end}}

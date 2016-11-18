@@ -1,0 +1,48 @@
+{{define "dup"}}
+<div
+  {{range .Component.Attr}}{{.Render}} {{end}}
+  class="custom-dup custom-js-dup
+  {{.Component.Classes.Render}}"
+  >
+
+  <div class="custom-dup-template">
+    <div class="custom-dup-item">
+      <div class="custom-dup-component">
+         {{if .Component.Duped}}
+          {{.Component.Duped.Render}}
+         {{end}}
+      </div>
+      <button
+        {{range .Component.BtRemoveAttr}}{{.Render}} {{end}}
+        class="mdl-button mdl-js-button custom-dup-bt-remove {{.Component.BtRemoveClasses.Render}}"
+        >
+        {{.Component.BtRemoveText}}
+      </button>
+    </div>
+  </div>
+
+  <div class="custom-dup-container">
+   {{range .Component.Items}}
+    <div class="custom-dup-item">
+      <div class="custom-dup-component">
+         {{.Render}}
+      </div>
+      <button
+        {{range $.Component.BtRemoveAttr}}{{.Render}} {{end}}
+        class="mdl-button mdl-js-button custom-dup-bt-remove {{$.Component.BtRemoveClasses.Render}}"
+        >
+        {{$.Component.BtRemoveText}}
+      </button>
+    </div>
+   {{end}}
+  </div>
+
+  <button
+    {{range .Component.BtAddAttr}}{{.Render}} {{end}}
+    class="mdl-button mdl-js-button custom-dup-bt-add {{.Component.BtAddClasses.Render}}"
+    >
+    {{.Component.BtAddText}}
+  </button>
+
+</div>
+{{end}}

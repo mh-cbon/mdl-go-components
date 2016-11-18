@@ -1,0 +1,71 @@
+package components
+
+import (
+	mgc "github.com/mh-cbon/mdl-go-components"
+)
+
+type Slider struct {
+	mgc.ViewComponent
+	NodeLabel
+	NodePlaceholder
+	NodeSingleValue
+	NodeSingleError
+
+	Attr         AttrList
+	Classes      ClassList
+	InputAttr    AttrList
+	InputClasses ClassList
+}
+
+func NewSlider() *Slider {
+	ret := &Slider{}
+	ret.SetBlock("form_slider")
+	ret.SetType("range")
+	return ret
+}
+
+func (view *Slider) SetMin(b string) {
+	view.InputAttr.Set("min", b)
+}
+func (view *Slider) GetMin() string {
+	return view.InputAttr.GetValue("min")
+}
+
+func (view *Slider) SetMax(b string) {
+	view.InputAttr.Set("max", b)
+}
+func (view *Slider) GetMax() string {
+	return view.InputAttr.GetValue("max")
+}
+
+func (view *Slider) SetStep(b string) {
+	view.InputAttr.Set("step", b)
+}
+func (view *Slider) GetStep() string {
+	return view.InputAttr.GetValue("step")
+}
+
+func (view *Slider) SetType(b string) {
+	view.InputAttr.Set("type", b)
+}
+func (view *Slider) GetType() string {
+	return view.InputAttr.GetValue("type")
+}
+
+func (view *Slider) SetName(b string) {
+	view.InputAttr.Set("name", b)
+}
+func (view *Slider) GetName() string {
+	return view.InputAttr.GetValue("name")
+}
+
+func (view *Slider) SetId(b string) {
+	view.InputAttr.Set("id", b)
+}
+func (view *Slider) GetId() string {
+	return view.InputAttr.GetValue("id")
+}
+
+func (view *Slider) Render(args ...interface{}) (string, error) {
+	return view.GetRenderContext().RenderComponent(view, args)
+}

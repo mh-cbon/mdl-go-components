@@ -1,0 +1,24 @@
+{{define "form_select"}}
+<div
+{{range .Component.Attr}}{{.Render}} {{end}}
+  class="mdl-selectfield mdl-js-selectfield
+  {{if .Component.GetError}}is-invalid{{end}}
+  {{if not .Component.IsPlaceHolderOnly}}mdl-selectfield--floating-label{{end}}
+  {{.Component.Classes.Render}}">
+  <select
+  {{range .Component.InputAttr}}{{.Render}}{{end}}
+    class="mdl-selectfield__select {{.Component.InputClasses.Render}}"
+   >
+   {{range .Component.GetOptions}}
+   <option value="{{.Value}}"
+   {{if .IsChecked}}selected="selected"{{end}}
+   >{{.Label}}</option>
+   {{end}}
+  </select>
+  {{if .Component.GetIcon}}
+  <div class="mdl-selectfield__icon"><i class="material-icons">{{.Component.GetIcon}}</i></div>
+  {{end}}
+  <label class="mdl-selectfield__label" for="{{.Component.GetId}}">{{.Component.GetLabel}}</label>
+  <span class="mdl-selectfield__error">{{.Component.GetError}}</span>
+</div>
+{{end}}

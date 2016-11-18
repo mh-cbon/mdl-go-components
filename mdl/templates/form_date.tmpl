@@ -1,0 +1,20 @@
+{{define "form_date"}}
+<div
+  {{range .Component.Attr}}{{.Render}} {{end}}
+  class="mdl-textfield mdl-js-textfield custom-js-datefield
+  {{if .Component.GetError}}is-invalid{{end}}
+  {{if not .Component.IsPlaceHolderOnly}}mdl-textfield--floating-label{{end}}
+  {{.Component.Classes.Render}}"
+>
+  <input
+    {{range .Component.InputAttr}}{{.Render}}{{end}}
+    class="mdl-textfield__input {{.Component.InputClasses.Render}}"
+    type="text"
+  >
+  <input class="custom-datefield__value" type="hidden"
+    {{range .Component.HiddenAttr}}{{.Render}}{{end}}
+    >
+  <label class="mdl-textfield__label" for="{{.Component.GetId}}">{{.Component.GetLabel}}</label>
+  <span class="mdl-textfield__error">{{.Component.GetError}}</span>
+</div>
+{{end}}

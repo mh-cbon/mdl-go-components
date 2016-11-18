@@ -1,0 +1,30 @@
+{{define "tabs"}}
+  <div
+    {{range .Component.Attr}}{{.Render}} {{end}}
+    class="mdl-tabs mdl-js-tabs mdl-js-ripple-effect  {{.Component.Classes.Render}}"
+    >
+
+    <div
+      {{range .Component.MenuAttr}}{{.Render}} {{end}}
+      class="mdl-tabs__tab-bar {{.Component.MenuClasses.Render}}"
+      >
+      <!-- custom-justify-left -->
+      {{range .Component.Tabs}}
+        <a
+          {{range .TitleAttr}}{{.Render}} {{end}}
+          href="#{{.GetId}}"
+          class="mdl-tabs__tab {{.TitleClasses.Render}}"
+        >{{.Title}}</a>
+      {{end}}
+    </div>
+
+    {{range .Component.Tabs}}
+      <div
+        {{range .Attr}}{{.Render}} {{end}}
+        class="mdl-tabs__panel {{.Classes.Render}}">
+        {{.Content.Render}}
+      </div>
+    {{end}}
+
+  </div>
+{{end}}

@@ -1,0 +1,50 @@
+{{define "form_input_confirm"}}
+<div
+  {{range .Component.Attr}}{{.Render}} {{end}}
+  class="mdl-textfield
+  {{if .Component.GetError}}is-invalid{{end}}
+  {{.Component.Classes.Render}}
+  ">
+
+  <div
+    {{range .Component.InputLeft.Attr}}{{.Render}} {{end}}
+    class="mdl-textfield mdl-js-textfield
+    {{if not .Component.IsPlaceHolderOnly}}mdl-textfield--floating-label{{end}}
+    {{if .Component.GetError}}is-invalid{{end}}
+    {{.Component.InputLeft.Classes.Render}}
+  ">
+    <input
+      {{range .Component.InputLeft.InputAttr}}{{.Render}} {{end}}
+      class="mdl-textfield__input {{.Component.InputLeft.InputClasses.Render}}"
+      type="{{.Component.GetType}}"
+      value="{{.Component.InputLeft.GetValue}}"
+      >
+
+    <label class="mdl-textfield__label"
+    for="{{.Component.InputLeft.GetId}}"
+    >{{.Component.InputLeft.GetLabel}}</label>
+  </div>
+
+  <div
+    {{range .Component.InputRight.Attr}}{{.Render}} {{end}}
+    class="mdl-textfield mdl-js-textfield
+    {{if not .Component.IsPlaceHolderOnly}}mdl-textfield--floating-label{{end}}
+    {{if .Component.GetError}}is-invalid{{end}}
+    {{.Component.InputRight.Classes.Render}}
+  ">
+    <input
+      {{range .Component.InputRight.InputAttr}}{{.Render}} {{end}}
+      class="mdl-textfield__input {{.Component.InputRight.InputClasses.Render}}"
+      type="{{.Component.GetType}}"
+      value="{{.Component.InputRight.GetValue}}"
+      >
+
+    <label class="mdl-textfield__label"
+    for="{{.Component.InputRight.GetId}}"
+    >{{.Component.InputRight.GetLabel}}</label>
+  </div>
+
+  <span class="mdl-textfield__error">{{.Component.GetError}}</span>
+
+</div>
+{{end}}

@@ -1,0 +1,29 @@
+{{define "chip_autocomplete"}}
+<div
+  {{range .Component.Attr}}{{.Render}} {{end}}
+  class="custom-chipautocomplete custom-js-chipautocomplete
+  {{.Component.Classes.Render}}"
+  >
+  {{.Component.Input.Render}}
+  <div
+    {{range .Component.ResultsAttr}}{{.Render}} {{end}}
+    class="custom-chipautocomplete-results mdl-shadow--2dp
+    {{.Component.ResultsClasses.Render}}"
+    >
+    <ul class="mdl-list"></ul>
+  </div>
+  <div
+    {{range .Component.SelectAttr}}{{.Render}} {{end}}
+    class="custom-chipautocomplete-selected
+    {{.Component.SelectClasses.Render}}"
+    >
+    {{range .Component.Options}}
+      <span class="mdl-chip mdl-chip--deletable">
+        <input type="hidden" name="{{$.Component.GetOptionValueName}}" value="{{.Value}}" />
+        <span class="mdl-chip__text">{{.Label}}</span>
+        <button type="button" class="mdl-chip__action"><i class="material-icons">&#xE5C9;</i></button>
+      </span>
+    {{end}}
+  </div>
+</div>
+{{end}}
