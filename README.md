@@ -2,7 +2,9 @@
 
 [![GoDoc](https://godoc.org/github.com/mh-cbon/mdl-go-components?status.svg)](https://godoc.org/github.com/mh-cbon/mdl-go-components)
 
-Material Design Lite components intergration for Go
+Material Design Lite components intergration for Go.
+
+This integration is particularly suitable with [my fork of mdl](https://github.com/mh-cbon/material-design-lite).
 
 ## Install
 
