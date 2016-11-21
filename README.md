@@ -12,6 +12,14 @@ This integration is particularly suitable with [my fork of mdl](https://github.c
 glide get github.com/mh-cbon/mdl-go-components
 ```
 
+## Build
+
+To build a specific resources location,
+
+```sh
+go build -ldflags="-X github.com/mh-cbon/mdl-go-components.Tplpath=YOURPATH" your-main.go
+```
+
 ## Usage
 
 ```go
