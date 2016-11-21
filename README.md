@@ -31,10 +31,7 @@ var out io.Writer = os.Stdout
 func Example_main() {
 
 	// create  new template to reference mdl components blocks
-	t := template.New("")
-	if _, err := t.ParseGlob(mgc.TemplatesGlob()); err != nil {
-		panic(err)
-	}
+	t := mgc.MustTemplate()
 
 	// create a new render context: (template + writer)
 	ctx := mgc.NewRenderContext(t, out)
