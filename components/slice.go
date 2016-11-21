@@ -27,3 +27,11 @@ func (view *Slice) Render(args ...interface{}) (string, error) {
 	}
 	return "", nil
 }
+
+func (view *Slice) Translate(t Translator) {
+	for _, c := range view.Components {
+		if v, ok := c.(ViewTranslator); ok {
+			v.Translate(t)
+		}
+	}
+}

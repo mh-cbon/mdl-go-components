@@ -44,11 +44,28 @@ func (view *Dialog) SetBgContainerColor(colorname string) {
 	view.ContainerClasses.Add("mdl-color--" + colorname)
 }
 
+func (view *Dialog) Translate(t Translator) {
+  view.Ok.Translate(t)
+  view.Cancel.Translate(t)
+  view.Close.Translate(t)
+  if view.Content!=nil {
+    if v, ok := view.Content.(ViewTranslator); ok {
+      v.Translate(t)
+    }
+  }
+}
+
 func (view *Dialog) SetTitle(t string) {
 	view.Title = t
 }
 func (view *Dialog) GetTitle() string {
 	return view.Title
+}
+
+func (view *Dialog) SetContent(t string) {
+	text := NewText()
+	text.SetContent(t)
+	view.Content = text
 }
 
 func (view *Dialog) SetOkText(t string, icon string) {

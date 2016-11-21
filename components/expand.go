@@ -22,6 +22,17 @@ func NewExpand() *Expand {
 	return ret
 }
 
+func (view *Expand) Translate(t Translator) {
+  if v, ok := view.Bt.(ViewTranslator); ok {
+    v.Translate(t)
+  }
+	for _, c := range view.Children {
+		if v, ok := c.(ViewTranslator); ok {
+			v.Translate(t)
+		}
+	}
+}
+
 func (view *Expand) AddChild(some mgc.ViewComponentRenderer) {
 	view.Children = append(view.Children, some)
 }

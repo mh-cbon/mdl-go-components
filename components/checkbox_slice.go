@@ -55,6 +55,10 @@ func (view *CheckboxSlice) SetDisabled(b bool) {
 	}
 }
 
+func (view *CheckboxSlice) SetValue(s string) {
+	view.NodeWithOptions.SetValue(s)
+}
+
 func (view *CheckboxSlice) GetItem(index int, option NodeOption) *Checkbox {
 	sview := NewCheckbox()
 	sview.Attr.MergeFrom(view.Attr)
@@ -66,7 +70,6 @@ func (view *CheckboxSlice) GetItem(index int, option NodeOption) *Checkbox {
 	sview.SetType(view.GetType())
 	sview.SetBlock(view.GetItemBlock())
 	sview.SetOption(option)
-	sview.SetChecked(view.HasValue(option.GetValue()))
 	view.GetRenderContext().SetDefaultTo(sview)
 	return sview
 }

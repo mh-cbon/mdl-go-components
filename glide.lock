@@ -1,6 +1,4 @@
 hash: 834fb6716bbfa2298d4023fa9ce04e6f80663ae6139c8be5a289259a5d5b853d
 updated: 2016-11-13T19:18:03.725539403+01:00
-imports:
-- name: github.com/mh-cbon/this-path
-  version: cabd3e4b715946c0152b4172d71355c28b8fe7d5
+imports: []
 testImports: []

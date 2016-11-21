@@ -6,6 +6,27 @@ import (
 	"strings"
 )
 
+type Translator interface {
+	T(id string, args ...interface{}) string
+}
+
+type ViewTranslator interface {
+	Translate(t Translator)
+}
+
+type Namer interface {
+	GetName() string
+}
+type ValueSetter interface {
+	SetValue(s string)
+	SetIntValue(value int)
+	SetInt64Value(value int64)
+	SetUint64Value(value uint64)
+}
+type ValueSliceSetter interface {
+	SetValues(s []string)
+}
+
 type ClassList []string
 
 func (c *ClassList) Contains(some string) bool {
@@ -186,11 +207,11 @@ type NodeSingleValue struct {
 	Value string
 }
 
-func (i *NodeSingleValue) SetValue(s string) {
-	i.Value = s
-}
 func (i *NodeSingleValue) GetValue() string {
 	return i.Value
+}
+func (i *NodeSingleValue) SetValue(s string) {
+	i.Value = s
 }
 func (i *NodeSingleValue) SetIntValue(value int) {
 	i.SetValue(strconv.Itoa(value))
@@ -198,7 +219,7 @@ func (i *NodeSingleValue) SetIntValue(value int) {
 func (i *NodeSingleValue) SetInt64Value(value int64) {
 	i.SetValue(strconv.FormatInt(value, 10))
 }
-func (i *NodeSingleValue) SetUint64Value(name string, value uint64) {
+func (i *NodeSingleValue) SetUint64Value(value uint64) {
 	i.SetValue(strconv.FormatUint(value, 10))
 }
 
@@ -251,6 +272,9 @@ func (i *NodeWithOptions) AddOption(value string, label string) {
 		NodeSingleValue: NodeSingleValue{Value: value},
 	})
 }
+func (i *NodeWithOptions) AddInt64Option(value int64, label string) {
+	i.AddOption(strconv.FormatInt(value, 10), label)
+}
 func (i *NodeWithOptions) GetOptionForValue(s string) *NodeOption {
 	for _, v := range i.Options {
 		if v.Value == s {
@@ -265,6 +289,23 @@ func (i *NodeWithOptions) CheckOptions(values []string) {
 		if option != nil {
 			option.SetChecked(true)
 		}
+	}
+}
+func (i *NodeWithOptions) SetValue(s string) {
+	i.CheckOptions([]string{s})
+}
+func (i *NodeWithOptions) SetIntValue(value int) {
+	i.SetValue(strconv.Itoa(value))
+}
+func (i *NodeWithOptions) SetInt64Value(value int64) {
+	i.SetValue(strconv.FormatInt(value, 10))
+}
+func (i *NodeWithOptions) SetUint64Value(value uint64) {
+	i.SetValue(strconv.FormatUint(value, 10))
+}
+func (i *NodeWithOptions) Translate(t Translator) {
+  for _, v := range i.Options {
+		v.Translate(t)
 	}
 }
 
@@ -301,6 +342,13 @@ func (i *NodeLabel) SetLabel(s interface{}) {
 }
 func (i *NodeLabel) GetLabel() interface{} {
 	return i.Label
+}
+func (i *NodeLabel) Translate(t Translator) {
+  if x, ok := i.Label.(template.HTML); ok {
+    i.SetSafeLabel(t.T(string(x)))
+  } else if x, ok := i.Label.(string); ok {
+    i.SetLabel(t.T(x))
+  }
 }
 
 type NodePlaceholder struct {

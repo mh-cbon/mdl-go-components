@@ -1,0 +1,10 @@
+{{define "mgc/tag"}}
+{{.Component.OpenTag}}
+  {{range .Component.Attr}}{{.Render}} {{end}}
+  class="{{.Component.Classes.Render}}"
+  {{.Component.OpenTagClose}}
+{{range .Component.Components}}
+  {{.Render}}
+{{end}}
+{{.Component.CloseTag}}
+{{end}}

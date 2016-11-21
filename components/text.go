@@ -8,6 +8,7 @@ import (
 type Text struct {
 	mgc.ViewComponent
 	Content interface{}
+	TranslationArgs interface{}
 }
 
 func NewText() *Text {
@@ -16,16 +17,28 @@ func NewText() *Text {
 	return ret
 }
 
-func (t *Text) SetHTMLContent(some string) {
-	t.Content = template.HTML(some)
+func (view *Text) SetTranslationArgs(some interface{}) {
+	view.TranslationArgs = some
 }
 
-func (t *Text) SetContent(some string) {
-	t.Content = some
+func (view *Text) SetHTMLContent(some string) {
+	view.Content = template.HTML(some)
 }
 
-func (t *Text) GetContent() interface{} {
-	return t.Content
+func (view *Text) SetContent(some string) {
+	view.Content = some
+}
+
+func (view *Text) GetContent() interface{} {
+	return view.Content
+}
+
+func (view *Text) Translate(t Translator) {
+  if x, ok := view.Content.(template.HTML); ok {
+    view.SetHTMLContent(t.T(string(x), view.TranslationArgs))
+  } else if x, ok := view.Content.(string); ok {
+    view.SetContent(t.T(x, view.TranslationArgs))
+  }
 }
 
 func (view *Text) Render(args ...interface{}) (string, error) {

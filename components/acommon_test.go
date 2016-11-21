@@ -3,18 +3,15 @@ package components_test
 import (
 	"bytes"
 	mgc "github.com/mh-cbon/mdl-go-components"
-	"html/template"
 	"regexp"
 	"testing"
+	"html/template"
 )
 
 var tmpl *template.Template
 
 func init() {
-	tmpl = template.New("")
-	if _, err := tmpl.ParseGlob("../" + mgc.TemplatesGlob()); err != nil {
-		panic(err)
-	}
+	tmpl = mgc.MustTemplate()
 }
 
 func validateComponent(t *testing.T, component mgc.ViewComponentRenderer, expectations []string) {

@@ -24,6 +24,14 @@ func (view *Form) Render(args ...interface{}) (string, error) {
 	return view.GetRenderContext().RenderComponent(view, args)
 }
 
+func (view *Form) Translate(t Translator) {
+	for _, c := range view.Components {
+		if v, ok := c.(ViewTranslator); ok {
+			v.Translate(t)
+		}
+	}
+}
+
 func (view *Form) SetMethod(b string) {
 	view.Attr.Set("method", b)
 }
@@ -48,12 +56,74 @@ func (view *Form) SetTarget(b string) {
 func (view *Form) GetTarget() string {
 	return view.Attr.GetValue("target")
 }
+func (view *Form) Get(name string) mgc.ViewComponentRenderer {
+	for _, c := range view.Components {
+		if v, ok := c.(Namer); ok {
+			if v.GetName()==name {
+    		view.GetRenderContext().SetDefaultTo(c)
+				return c
+			}
+		}
+	}
+	return nil
+}
+func (view *Form) GetText(name string) *Input {
+	c := view.Get(name)
+	if c !=nil {
+		if v, ok := c.(*Input); ok {
+			return v
+		}
+	}
+	return nil
+}
+func (view *Form) GetHidden(name string) *Input {
+	return view.GetText(name)
+}
+func (view *Form) GetPassword(name string) *Input {
+	return view.GetText(name)
+}
+func (view *Form) GetSelect(name string) *Select {
+	c := view.Get(name)
+	if c !=nil {
+		if v, ok := c.(*Select); ok {
+			return v
+		}
+	}
+	return nil
+}
+func (view *Form) GetValueSetter(name string) ValueSetter {
+	c := view.Get(name)
+	if c !=nil {
+		if v, ok := c.(ValueSetter); ok {
+			return v
+		}
+	}
+	return nil
+}
+func (view *Form) GetValueSliceSetter(name string) ValueSliceSetter {
+	c := view.Get(name)
+	if c !=nil {
+		if v, ok := c.(ValueSliceSetter); ok {
+			return v
+		}
+	}
+	return nil
+}
+func (view *Form) GetButton(name string) *Button {
+	c := view.Get(name)
+	if c !=nil {
+		if v, ok := c.(*Button); ok {
+			return v
+		}
+	}
+	return nil
+}
+func (view *Form) GetSubmit(name string) *Button {
+	return view.GetButton(name)
+}
 
 func (view *Form) Add(some mgc.ViewComponentRenderer) {
 	view.Components = append(view.Components, some)
-	// if v, ok := some.(mgc.Ider); ok && v.GetId()=="" {
-	//   v.SetId("rnd-"+name+"-"+view.GetRenderContext().GetId())
-	// }
 }
 
 func (view *Form) AddText(name string) *Input {

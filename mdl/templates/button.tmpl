@@ -1,9 +1,16 @@
 {{define "mgc/button"}}
 {{if .Component.Attr.GetValue "href"}}
-  <a {{range .Component.Attr}}{{.Render}} {{end}}
-    class="{{.Component.Classes.Render}}"
-    {{if .Component.GetValue}}value="{{.Component.GetValue}}"{{end}}
-    >{{.Component.GetLabel}}</a>
+  {{if .Component.IsDisabled}}
+    <span {{range .Component.Attr}}{{.Render}} {{end}}
+      class="{{.Component.Classes.Render}}"
+      {{if .Component.GetValue}}value="{{.Component.GetValue}}"{{end}}
+      >{{.Component.GetLabel}}</span>
+  {{else}}
+    <a {{range .Component.Attr}}{{.Render}} {{end}}
+      class="{{.Component.Classes.Render}}"
+      {{if .Component.GetValue}}value="{{.Component.GetValue}}"{{end}}
+      >{{.Component.GetLabel}}</a>
+  {{end}}
 {{else}}
   <button type="{{.Component.GetType}}"
     {{range .Component.Attr}}{{.Render}} {{end}}

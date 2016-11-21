@@ -1,6 +1,8 @@
 {{define "mgc/data_table"}}
   {{if not (len .Component.Rows)}}
-    {{.Component.Empty.Render}}
+    {{ if .Component.Empty}}
+      {{.Component.Empty.Render}}
+    {{end}}
   {{else}}
     <table
     {{range .Component.Attr}}{{.Render}}{{end}}
@@ -13,7 +15,7 @@
           {{range .Attr}}{{.Render}}{{end}}
           >
           {{if .IsSortable}}
-            <a href="?{{.GetNextSortdirParam "sort"}}">
+            <a href="{{.GetSortHref}}">
               {{if not .GetSortdir}}
                 <i class='material-icons'>{{.SortIcon}}</i>
               {{end}}
@@ -32,7 +34,7 @@
           {{range .Attr}}{{.Render}}{{end}}
           {{if .GetValue}}value="{{.GetValue}}"{{end}}>
           {{range .Cells}}
-            <td  class="{{.Classes.Render}}"
+            <td class="{{.Classes.Render}}"
               {{range .Attr}}{{.Render}}{{end}}
             >
             {{if .LinkIcon}}

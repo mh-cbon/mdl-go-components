@@ -13,6 +13,7 @@ func TestDataTable(t *testing.T) {
 	header = input.SetHeader("id", "id")
 	header.SetNumeric(true)
 	header = input.SetHeader("name", "name")
+	header.SetNumeric(false)
 	header = input.SetHeader("sku", "sku")
 	header.SetHidePhone(true)
 	header = input.SetHeader("edit", "")
@@ -34,13 +35,13 @@ func TestDataTable(t *testing.T) {
 
 	expectations := []string{
 		`<table\s+class="mdl-data-table custom-js-data-table custom-data-table mdl-shadow--2dp\s+"\s+>`,
-		`<th\s+class="mdl-data-table__cell--non-numeric"\s+>\s+id\s+</th>`,
-		`<th\s+class=""\s+>\s+name\s+</th>`,
+		`<th\s+class=""\s+>\s+id\s+</th>`,
+		`<th\s+class="mdl-data-table__cell--non-numeric"\s+>\s+name\s+</th>`,
 		`<th\s+class="mdl-cell--hide-phone"\s+>\s+sku\s+</th>`,
 		`<tr\s+class=""\s+value="1">`,
-		`<td\s+class="mdl-data-table__cell--non-numeric"\s+>\s+1\s+</td>`,
-		`<td\s+class=""\s+>\s+name1\s+</td>`,
-		`<td\s+class=""\s+>\s+sku1\s+</td>`,
+		`<td\s+class=""\s+>\s+1\s+</td>`,
+		`<td\s+class="mdl-data-table__cell--non-numeric"\s+>\s+name1\s+</td>`,
+		`<td\s+class="mdl-cell--hide-phone"\s+>\s+sku1\s+</td>`,
 		`<td\s+class=""\s+>\s+<a href="http://google.com" target="_blank">\s+<i class="material-icons">edit</i>\s+</a>\s+</td>`,
 	}
 	validateComponent(t, input, expectations)

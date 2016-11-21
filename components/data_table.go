@@ -3,6 +3,8 @@ package components
 import (
 	mgc "github.com/mh-cbon/mdl-go-components"
 	"time"
+	"net/url"
+	"strconv"
 )
 
 type DataTable struct {
@@ -12,6 +14,9 @@ type DataTable struct {
 
 	Classes ClassList
 	Attr    AttrList
+	BaseUrl *url.URL
+	EnsureQueryArgs map[string]string
+	SortParamName string
 
 	Empty mgc.ViewComponentRenderer
 
@@ -26,7 +31,14 @@ func NewDataTable() *DataTable {
 func (view *DataTable) Render(args ...interface{}) (string, error) {
 	if k := view.GetSortIcon(); k != "" {
 		for _, header := range view.Headers {
-			header.SetSortIcon(k)
+      if header.IsSortable() {
+  			header.SetSortIcon(k)
+        u := *view.BaseUrl
+  			header.SetBaseUrl(&u)
+  			header.SetSortParamName(view.SortParamName)
+  			header.SetEnsureArgs(view.EnsureQueryArgs)
+        header.SetSortdir(header.GuessSortdir())
+      }
 		}
 	}
 	for _, row := range view.Rows {
@@ -41,6 +53,13 @@ func (view *DataTable) Render(args ...interface{}) (string, error) {
 	}
 	return view.GetRenderContext().RenderComponent(view, args)
 }
+
+func (view *DataTable) Translate(t Translator) {
+	for _, c := range view.Headers {
+		c.Translate(t)
+	}
+}
+
 func (l *DataTable) AddRow() *DataTableRow {
 	ret := &DataTableRow{}
 	l.Rows = append(l.Rows, ret)
@@ -55,6 +74,15 @@ func (l *DataTable) SetBtSelector(some string) {
 	} else {
 		l.Attr.Set("bt-el", some)
 	}
+}
+func (l *DataTable) SetBaseUrl(some *url.URL) {
+	l.BaseUrl = some
+}
+func (l *DataTable) SetSortParamName(sortParamName string) {
+	l.SortParamName = sortParamName
+}
+func (l *DataTable) SetEnsureArgs(ensureQueryArgs map[string]string) {
+	l.EnsureQueryArgs = ensureQueryArgs
 }
 func (l *DataTable) SetHeader(name string, txt string) *DataTableHeader {
 	v := l.GetHeader(name)
@@ -142,6 +170,10 @@ type DataTableHeader struct {
 	Classes ClassList
 	Attr    AttrList
 
+	BaseUrl *url.URL
+	SortParamName string
+	EnsureQueryArgs map[string]string
+
 	CellName string
 	CellTxt  string
 
@@ -158,6 +190,10 @@ func (l *DataTableHeader) GetCellTxt() string {
 	return l.CellTxt
 }
 
+func (view *DataTableHeader) Translate(t Translator) {
+	view.SetCellTxt(t.T(view.GetCellTxt()))
+}
+
 func (l *DataTableHeader) SetCellName(b string) *DataTableHeader {
 	l.CellName = b
 	return l
@@ -165,7 +201,15 @@ func (l *DataTableHeader) SetCellName(b string) *DataTableHeader {
 func (l *DataTableHeader) GetCellName() string {
 	return l.CellName
 }
-
+func (l *DataTableHeader) SetBaseUrl(some *url.URL) {
+	l.BaseUrl = some
+}
+func (l *DataTableHeader) SetSortParamName(sortParamName string) {
+	l.SortParamName = sortParamName
+}
+func (l *DataTableHeader) SetEnsureArgs(ensureQueryArgs map[string]string) {
+	l.EnsureQueryArgs = ensureQueryArgs
+}
 func (l *DataTableHeader) SetHidePhone(b bool) *DataTableHeader {
 	if b {
 		l.Classes.Add("mdl-cell--hide-phone")
@@ -223,6 +267,24 @@ func (l *DataTableHeader) GetSortdir() string {
 	}
 	return ""
 }
+func (l *DataTableHeader) GuessSortdir() string {
+  if l.BaseUrl!=nil {
+    q := l.BaseUrl.Query()
+    if values, ok := q[l.SortParamName]; ok {
+      for _, v := range values {
+        k := len(l.GetCellName())
+        if len(v)>k && v[0:k]==l.GetCellName() {
+          if v[k+1:]=="asc" {
+            return "asc"
+          } else if v[k+1:]=="desc"{
+            return "desc"
+          }
+        }
+      }
+    }
+  }
+	return ""
+}
 func (l *DataTableHeader) GetNextSortdir() string {
 	k := l.GetSortdir()
 	if k == "" {
@@ -232,12 +294,40 @@ func (l *DataTableHeader) GetNextSortdir() string {
 	}
 	return ""
 }
-func (l *DataTableHeader) GetNextSortdirParam(name string) string {
-	k := l.GetNextSortdir()
-	if k == "" {
-		return ""
-	}
-	return name + "=" + k
+func (l *DataTableHeader) GetSortHref() string {
+  if l.BaseUrl!=nil {
+    q := l.BaseUrl.Query()
+    s := l.GetNextSortdir()
+    if values, ok := q[l.SortParamName]; !ok {
+      if s!="" {
+        q.Set(l.SortParamName, l.GetCellName()+"-"+s)
+      }
+    } else {
+      f := false
+      for i, v := range values {
+        k := len(l.GetCellName())
+        if len(v)>k && v[0:k]==l.GetCellName() {
+          if s=="" {
+            values = append(values[:i], values[i+1:]...)
+          } else {
+            values[i] = l.GetCellName()+"-"+s
+          }
+          f = true
+          break
+        }
+      }
+      if !f {
+        values = append(values, l.GetCellName()+"-asc")
+      }
+      q[l.SortParamName] = values
+    }
+    for k, v := range l.EnsureQueryArgs {
+      q.Set(k, v)
+    }
+  	l.BaseUrl.RawQuery = q.Encode()
+  	return l.BaseUrl.String()
+  }
+  return ""
 }
 
 func (l *DataTableHeader) SetSortIcon(icon string) *DataTableHeader {
@@ -257,7 +347,7 @@ func (l *DataTableHeader) GetLinkIcon() string {
 }
 
 func (l *DataTableHeader) SetNumeric(numeric bool) *DataTableHeader {
-	if numeric {
+	if !numeric {
 		l.Classes.Add("mdl-data-table__cell--non-numeric")
 	} else {
 		l.Classes.Remove("mdl-data-table__cell--non-numeric")
@@ -293,6 +383,9 @@ func (l *DataTableRow) SetCell(name string, value string) *DataTableRow {
 	cell.SetCellName(name)
 	cell.SetCellTxt(value)
 	return l
+}
+func (l *DataTableRow) SetCellInt64(name string, value int64) *DataTableRow {
+	return l.SetCell(name, strconv.FormatInt(value, 10))
 }
 
 type DataTableCell struct {
@@ -345,9 +438,9 @@ func (l *DataTableCell) IsHidePhone() bool {
 
 func (l *DataTableCell) SetHideTablet(b bool) *DataTableCell {
 	if b {
-		l.Classes.Add("mdl-cell--hide-phone")
+		l.Classes.Add("mdl-cell--hide-tablet")
 	} else {
-		l.Classes.Remove("mdl-cell--hide-phone")
+		l.Classes.Remove("mdl-cell--hide-tablet")
 	}
 	return l
 }

@@ -1,0 +1,13 @@
+{{define "mgc/pagination"}}
+<div {{range .Component.Attr}}{{.Render}} {{end}}
+  class="{{.Component.Classes.Render}}">
+
+  {{.Component.BtPrev.Render}}
+
+  {{.Component.GoToText}}
+  {{.Component.Select.Render}}
+  / {{.Component.GetPagesCnt}}
+
+  {{.Component.BtNext.Render}}
+</div>
+{{end}}

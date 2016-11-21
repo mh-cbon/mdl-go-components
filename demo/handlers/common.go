@@ -1,11 +1,9 @@
 package handlers
 
 import (
-	"github.com/mh-cbon/mainpath"
 	mgc "github.com/mh-cbon/mdl-go-components"
 	"html/template"
 	"net/http"
-	"path/filepath"
 )
 
 func SetRoutes() {
@@ -72,8 +70,6 @@ type viewData struct {
 
 func renderComponents(w http.ResponseWriter, data *viewData) {
 
-	tplPath := filepath.Join(mainpath.DirToMain(), "..", mgc.TemplatesGlob())
-
 	tmpl := `<html>
   <head>
   <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
@@ -89,11 +85,9 @@ func renderComponents(w http.ResponseWriter, data *viewData) {
     <script src="/static/node_modules/@mh-cbon/material-design-lite/build/material.js"></script>
   </body>
   </html>`
-	t := template.New("")
-	t.Parse(tmpl)
-	if _, err := t.ParseGlob(tplPath); err != nil {
-		panic(err)
-	}
+
+	t := mgc.MustTemplate()
+  t.Parse(tmpl)
 
 	ctx := mgc.NewRenderContext(t, w)
 

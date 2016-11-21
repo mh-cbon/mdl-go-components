@@ -53,6 +53,14 @@ func (view *Select) SetDisabled(b bool) {
 	}
 }
 
+func (view *Select) UpdateWindowUrl(b bool) {
+	if b {
+		view.Classes.Add("custom-js-select-change-url")
+	} else {
+    view.Classes.Remove("custom-js-select-change-url")
+	}
+}
+
 func (view *Select) SetName(b string) {
 	view.InputAttr.Set("name", b)
 }
@@ -65,6 +73,11 @@ func (view *Select) SetId(b string) {
 }
 func (view *Select) GetId() string {
 	return view.InputAttr.GetValue("id")
+}
+
+func (view *Select) Translate(t Translator) {
+	view.NodeLabel.Translate(t)
+	view.NodeWithOptions.Translate(t)
 }
 
 func (view *Select) Render(args ...interface{}) (string, error) {
