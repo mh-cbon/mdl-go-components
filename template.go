@@ -15,13 +15,14 @@ func GuessGlob() string {
 	return p
 }
 
+func Template() (*template.Template, error) {
+	return template.New("").ParseGlob(GuessGlob())
+}
+
 func MustTemplate() *template.Template {
 	t, err := Template()
 	if err != nil {
 		panic(err)
 	}
 	return t
-}
-func Template() (*template.Template, error) {
-	return template.New("").ParseGlob(GuessGlob())
 }
