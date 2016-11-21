@@ -1,4 +1,8 @@
-hash: 834fb6716bbfa2298d4023fa9ce04e6f80663ae6139c8be5a289259a5d5b853d
-updated: 2016-11-13T19:18:03.725539403+01:00
-imports: []
+hash: e966c9a8508392688f154904bee1f15c41f3a80925baa25c7187161c4cede9ec
+updated: 2016-11-21T23:35:41.790780586+01:00
+imports:
+- name: github.com/mh-cbon/guess-path
+  version: b3b15f30ffcd2d1bab5e91c9f49e0fb6b0d70680
+- name: github.com/vincent-petithory/dataurl
+  version: 9a301d65acbb728fcc3ace14f45f511a4cfeea9c
 testImports: []

@@ -2,8 +2,8 @@ package main
 
 import (
 	"fmt"
-	"github.com/mh-cbon/mainpath"
 	"github.com/mh-cbon/mdl-go-components/demo/handlers"
+	"github.com/mh-cbon/guess-path"
 	"log"
 	"net/http"
 	"os/exec"
@@ -15,12 +15,22 @@ func main() {
 
 	handlers.SetRoutes()
 
-	fs := http.FileServer(http.Dir(mainpath.DirToMain()))
+	fs := http.FileServer(http.Dir(GuessPath()))
 	http.Handle("/static/", http.StripPrefix("/", fs))
 
 	go httpServe(":8080")
 	go openbrowser("http://localhost:8080/")
 	<-make(chan bool)
+}
+
+var Demopath = ""
+
+func GuessPath() string {
+	p := guesspath.Path(Demopath, "")
+	if p == "" {
+		panic("path not matched")
+	}
+	return p
 }
 
 func httpServe(addr string) {

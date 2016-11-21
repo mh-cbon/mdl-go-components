@@ -33,11 +33,13 @@ func (view *DataTable) Render(args ...interface{}) (string, error) {
 		for _, header := range view.Headers {
       if header.IsSortable() {
   			header.SetSortIcon(k)
-        u := *view.BaseUrl
-  			header.SetBaseUrl(&u)
-  			header.SetSortParamName(view.SortParamName)
-  			header.SetEnsureArgs(view.EnsureQueryArgs)
-        header.SetSortdir(header.GuessSortdir())
+				if view.BaseUrl!=nil {
+	        u := *view.BaseUrl
+	  			header.SetBaseUrl(&u)
+	  			header.SetSortParamName(view.SortParamName)
+	  			header.SetEnsureArgs(view.EnsureQueryArgs)
+	        header.SetSortdir(header.GuessSortdir())
+				}
       }
 		}
 	}
