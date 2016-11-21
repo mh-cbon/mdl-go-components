@@ -1,6 +1,7 @@
 package mdlgocomponents
 
 import (
+	"github.com/mh-cbon/guess-path"
 	"html/template"
 )
 
