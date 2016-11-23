@@ -16,16 +16,19 @@ type InputFile struct {
 	InputClasses  ClassList
 	InputFileAttr AttrList
 
+	InputTextValue string
 	AttachIcon string
 	ClearIcon  string
 }
 
 func NewInputFile() *InputFile {
-	ret := &InputFile{}
-	ret.SetBlock("mgc/form_input_file")
-	ret.SetAttachIcon("attach_file")
-	ret.SetClearIcon("clear")
-	return ret
+	view := &InputFile{}
+	view.SetBlock("mgc/form_input_file")
+	view.SetAttachIcon("attach_file")
+	view.SetClearIcon("clear")
+	view.InputAttr.Set("type", "text")
+	view.InputAttr.Set("readonly", "readonly")
+	return view
 }
 
 func (view *InputFile) SetErrors(p ErrorProvider) {
@@ -61,6 +64,12 @@ func (view *InputFile) SetId(b string) {
 }
 func (view *InputFile) GetId() string {
 	return view.InputAttr.GetValue("id")
+}
+func (view *InputFile) SetInputTextValue(b string) {
+	view.InputTextValue = b
+}
+func (view *InputFile) SetInputTextName(b string) {
+  view.InputAttr.Set("name", b)
 }
 
 func (view *InputFile) SetMultiple(b bool) {

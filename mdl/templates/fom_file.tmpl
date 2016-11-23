@@ -9,9 +9,8 @@
   <input
     {{range .Component.InputAttr}}{{.Render}}{{end}}
     class="mdl-textfield__input {{.Component.InputClasses.Render}}"
-    type="text"
-    value=""
-    readonly="readonly" />
+    value="{{.Component.InputTextValue}}"
+     />
 
   <label>
     <div class="mdl-button mdl-button--icon">

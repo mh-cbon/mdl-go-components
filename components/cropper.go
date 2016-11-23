@@ -123,6 +123,12 @@ func (c *Cropper) SetAttachIcon(b string) {
 func (c *Cropper) GetAttachIcon() string {
 	return c.InputFile.GetAttachIcon()
 }
+func (view *Cropper) SetInputTextValue(b string) {
+	view.InputFile.SetInputTextValue(b)
+}
+func (view *Cropper) SetInputTextName(b string) {
+	view.InputFile.SetInputTextName(b)
+}
 
 func (c *Cropper) SetName(b string) {
 	c.SetResultInputName(b)
