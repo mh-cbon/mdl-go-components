@@ -165,6 +165,13 @@ func (c *Cropper) GetResultMode() string {
 	}
 	return ""
 }
+func (c *Cropper) RoundedPreview(b bool) {
+  if b {
+    c.CurrentImgClasses.Add("custom-cropper-current-img--rounded")
+  } else {
+    c.CurrentImgClasses.Remove("custom-cropper-current-img--rounded")
+  }
+}
 func (c *Cropper) SetB64ExportWidth(b string) {
   if b == "" {
     c.Attr.Remove("b64-export-width")
