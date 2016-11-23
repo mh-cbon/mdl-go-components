@@ -1,10 +1,10 @@
 {{define "mgc/form_radio"}}
   <label
-  {{range .Component.Attr}}{{.Render}} {{end}}
+  {{range .Component.Attr}}{{.SafeName}}="{{.Value}}" {{end}}
   class="mdl-radio mdl-js-radio {{.Component.Classes.Render}}"
   for="{{.Component.GetId}}">
     <input
-    {{range .Component.InputAttr}}{{.Render}}{{end}}
+    {{range .Component.InputAttr}}{{.SafeName}}="{{.Value}}" {{end}}
     type="{{.Component.GetType}}"
     {{if .Component.Option.GetValue}}value="{{.Component.Option.GetValue}}"{{end}}
     class="mdl-radio__button {{.Component.InputClasses.Render}}"

@@ -5,14 +5,14 @@
     {{end}}
   {{else}}
     <table
-    {{range .Component.Attr}}{{.Render}}{{end}}
+    {{range .Component.Attr}}{{.SafeName}}="{{.Value}}" {{end}}
     class="mdl-data-table custom-js-data-table custom-data-table mdl-shadow--2dp {{.Component.Classes.Render}}"
     >
       <thead>
         <tr>
           {{range .Component.Headers}}
           <th class="{{.Classes.Render}}"
-          {{range .Attr}}{{.Render}}{{end}}
+          {{range .Attr}}{{.SafeName}}="{{.Value}}" {{end}}
           >
           {{if .IsSortable}}
             <a href="{{.GetSortHref}}">
@@ -31,11 +31,11 @@
       <tbody>
         {{range .Component.Rows}}
         <tr class="{{.Classes.Render}}"
-          {{range .Attr}}{{.Render}}{{end}}
+          {{range .Attr}}{{.SafeName}}="{{.Value}}" {{end}}
           {{if .GetValue}}value="{{.GetValue}}"{{end}}>
           {{range .Cells}}
             <td class="{{.Classes.Render}}"
-              {{range .Attr}}{{.Render}}{{end}}
+              {{range .Attr}}{{.SafeName}}="{{.Value}}" {{end}}
             >
             {{if .LinkIcon}}
               <a href="{{.CellTxt}}" target="_blank">

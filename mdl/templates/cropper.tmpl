@@ -1,13 +1,13 @@
 {{define "mgc/cropper"}}
 <div
-  {{range .Component.Attr}}{{.Render}} {{end}}
+  {{range .Component.Attr}}{{.SafeName}}="{{.Value}}" {{end}}
   class="custom-cropper custom-js-cropper
   {{.Component.Classes.Render}}"
   >
 
   {{if .Component.GetCurrentImg}}
   <div
-    {{range .Component.CurrentImgAttr}}{{.Render}} {{end}}
+    {{range .Component.CurrentImgAttr}}{{.SafeName}}="{{.Value}}" {{end}}
     class="custom-cropper-current-img {{.Component.CurrentImgClasses.Render}}">
     <img {{.Component.GetCurrentImgAttr}} />
   </div>

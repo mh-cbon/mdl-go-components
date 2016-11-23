@@ -1,10 +1,10 @@
 {{define "mgc/form_switch"}}
 <label
-  {{range .Component.Attr}}{{.Render}} {{end}}
+  {{range .Component.Attr}}{{.SafeName}}="{{.Value}}" {{end}}
   class="mdl-switch mdl-js-switch {{.Component.Classes.Render}}"
   for="{{.Component.GetId}}">
   <input
-  {{range .Component.InputAttr}}{{.Render}}{{end}}
+  {{range .Component.InputAttr}}{{.SafeName}}="{{.Value}}" {{end}}
   type="checkbox"
   class="mdl-switch__input {{.Component.InputClasses.Render}}"
   {{if .Component.Option.IsChecked}}checked="checked"{{end}}

@@ -1,6 +1,6 @@
 {{define "mgc/component_dialog"}}
 <div class="custom-js-dialog custom-dialog {{.Component.Classes.Render}}"
-  {{range .Component.Attr}}{{.Render}}{{end}}
+  {{range .Component.Attr}}{{.SafeName}}="{{.Value}}" {{end}}
   >
   <div class="custom-dialog-bg {{.Component.BgClasses.Render}}"></div>
   <div class="custom-dialog-container {{.Component.ContainerClasses.Render}}">

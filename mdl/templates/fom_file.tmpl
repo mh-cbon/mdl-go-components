@@ -1,13 +1,13 @@
 {{define "mgc/form_input_file"}}
 <div
-  {{range .Component.Attr}}{{.Render}} {{end}}
+  {{range .Component.Attr}}{{.SafeName}}="{{.Value}}" {{end}}
   class="mdl-textfield mdl-js-textfield custom-inputfile custom-js-inputfile
   {{if .Component.GetError}}is-invalid{{end}}
   {{if not .Component.IsPlaceHolderOnly}}mdl-textfield--floating-label{{end}}
   {{.Component.Classes.Render}}">
 
-  <input
-    {{range .Component.InputAttr}}{{.Render}}{{end}}
+  <input 
+    {{range .Component.InputAttr}}{{.SafeName}}="{{.Value}}" {{end}}
     class="mdl-textfield__input {{.Component.InputClasses.Render}}"
     value="{{.Component.InputTextValue}}"
      />
@@ -18,7 +18,7 @@
       <i class="material-icons custom-clearbutton">{{.Component.ClearIcon}}</i>
     </div>
     <input
-      {{range .Component.InputFileAttr}}{{.Render}}{{end}}
+      {{range .Component.InputFileAttr}}{{.SafeName}}="{{.Value}}" {{end}}
       type="file"
      />
   </label>

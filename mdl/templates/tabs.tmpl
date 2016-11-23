@@ -1,17 +1,17 @@
 {{define "mgc/tabs"}}
-  <div
-    {{range .Component.Attr}}{{.Render}} {{end}}
+  <div 
+    {{range .Component.Attr}}{{.SafeName}}="{{.Value}}" {{end}}
     class="mdl-tabs mdl-js-tabs mdl-js-ripple-effect  {{.Component.Classes.Render}}"
     >
 
     <div
-      {{range .Component.MenuAttr}}{{.Render}} {{end}}
+      {{range .Component.MenuAttr}}{{.SafeName}}="{{.Value}}" {{end}}
       class="mdl-tabs__tab-bar {{.Component.MenuClasses.Render}}"
       >
       <!-- custom-justify-left -->
       {{range .Component.Tabs}}
         <a
-          {{range .TitleAttr}}{{.Render}} {{end}}
+          {{range .TitleAttr}}{{.SafeName}}="{{.Value}}" {{end}}
           href="#{{.GetId}}"
           class="mdl-tabs__tab {{.TitleClasses.Render}}"
         >{{.Title}}</a>
@@ -20,7 +20,7 @@
 
     {{range .Component.Tabs}}
       <div
-        {{range .Attr}}{{.Render}} {{end}}
+        {{range .Attr}}{{.SafeName}}="{{.Value}}" {{end}}
         class="mdl-tabs__panel {{.Classes.Render}}">
         {{.Content.Render}}
       </div>

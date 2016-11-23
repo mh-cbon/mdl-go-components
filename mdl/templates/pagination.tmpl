@@ -1,5 +1,5 @@
 {{define "mgc/pagination"}}
-<div {{range .Component.Attr}}{{.Render}} {{end}}
+<div {{range .Component.Attr}}{{.SafeName}}="{{.Value}}" {{end}}
   class="{{.Component.Classes.Render}}">
 
   {{.Component.BtPrev.Render}}

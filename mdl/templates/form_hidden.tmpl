@@ -1,6 +1,6 @@
 {{define "mgc/form_hidden"}}
   <input
-    {{range .Component.Attr}}{{.Render}}{{end}}
+    {{range .Component.Attr}}{{.SafeName}}="{{.Value}}" {{end}}
     class="{{.Component.Classes.Render}}"
     type="{{.Component.GetType}}"
     name="{{.Component.GetName}}"

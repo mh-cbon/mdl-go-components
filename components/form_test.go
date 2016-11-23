@@ -14,8 +14,16 @@ func TestForm(t *testing.T) {
 
 	expectations := []string{
 		`<form\s+id="rnd-0"\s+class="">`,
-		`<input\s+name="name"\s+id="rnd-1"\s+class="mdl-textfield__input\s+"\s+type="text"\s+value=""\s+>`,
-		`<input\s+id="rnd-2"\s+class="mdl-textfield__input\s+"\s+type="text"\s+value=""\s+readonly="readonly"\s+/>`,
+		`<input[^>]+name="name"[^>]+id="rnd-1"[^>]+>`,
+		`<input[^>]+id="rnd-1"[^>]+class="mdl-textfield__input\s+"[^>]+>`,
+		`<input[^>]+id="rnd-1"[^>]+type="text"[^>]+>`,
+		`<input[^>]+id="rnd-1"[^>]+value=""[^>]+>`,
+
+		`<input[^>]+type="text"[^>]+id="rnd-2"[^>]+/>`,
+		`<input[^>]+readonly="readonly"[^>]+id="rnd-2"[^>]+/>`,
+		`<input[^>]+id="rnd-2"[^>]+class="mdl-textfield__input\s+"[^>]+/>`,
+		`<input[^>]+id="rnd-2"[^>]+value=""[^>]+/>`,
+
 	}
 	validateComponent(t, form, expectations)
 

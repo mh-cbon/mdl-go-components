@@ -15,7 +15,10 @@ func TestInputFile(t *testing.T) {
 
 	expectations := []string{
 		`custom-js-inputfile\s+is-invalid\s+mdl-textfield--floating-label`,
-		`<input\s+id="id"\s+class="mdl-textfield__input\s+"\s+type="text"\s+value=""\s+readonly="readonly"\s+/>`,
+		`<input[^>]+type="text"[^>]+id="id"[^>]+/>`,
+		`<input[^>]+readonly="readonly"[^>]+id="id"[^>]+/>`,
+		`<input[^>]+id="id"[^>]+class="mdl-textfield__input\s+"[^>]+/>`,
+		`<input[^>]+id="id"[^>]+value=""[^>]+/>`,
 		`<input\s+name="name"\s+type="file"\s+/>`,
 		`<label class="mdl-textfield__label" for="id">label</label>`,
 		`<span class="mdl-textfield__error">This is an error!</span>`,

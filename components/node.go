@@ -118,9 +118,8 @@ type AttributeNode struct {
 	Value string
 }
 
-func (c AttributeNode) Render() interface{} {
-	ret := c.Name + "=\"" + c.Value + "\" "
-	return template.HTMLAttr(ret)
+func (c AttributeNode) SafeName() interface{} {
+	return template.HTMLAttr(c.Name)
 }
 
 type AttrList []AttributeNode

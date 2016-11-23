@@ -1,12 +1,12 @@
 {{define "mgc/form_select"}}
 <div
-{{range .Component.Attr}}{{.Render}} {{end}}
+{{range .Component.Attr}}{{.SafeName}}="{{.Value}}" {{end}}
   class="mdl-selectfield mdl-js-selectfield
   {{if .Component.GetError}}is-invalid{{end}}
   {{if not .Component.IsPlaceHolderOnly}}mdl-selectfield--floating-label{{end}}
   {{.Component.Classes.Render}}">
   <select
-  {{range .Component.InputAttr}}{{.Render}}{{end}}
+  {{range .Component.InputAttr}}{{.SafeName}}="{{.Value}}" {{end}}
     class="mdl-selectfield__select {{.Component.InputClasses.Render}}"
    >
    {{range .Component.GetOptions}}

@@ -1,19 +1,19 @@
 {{define "mgc/chip_autocomplete"}}
 <div
-  {{range .Component.Attr}}{{.Render}} {{end}}
+  {{range .Component.Attr}}{{.SafeName}}="{{.Value}}" {{end}}
   class="custom-chipautocomplete custom-js-chipautocomplete
   {{.Component.Classes.Render}}"
   >
   {{.Component.Input.Render}}
   <div
-    {{range .Component.ResultsAttr}}{{.Render}} {{end}}
+    {{range .Component.ResultsAttr}}{{.SafeName}}="{{.Value}}" {{end}}
     class="custom-chipautocomplete-results mdl-shadow--2dp
     {{.Component.ResultsClasses.Render}}"
     >
     <ul class="mdl-list"></ul>
   </div>
   <div
-    {{range .Component.SelectAttr}}{{.Render}} {{end}}
+    {{range .Component.SelectAttr}}{{.SafeName}}="{{.Value}}" {{end}}
     class="custom-chipautocomplete-selected
     {{.Component.SelectClasses.Render}}"
     >

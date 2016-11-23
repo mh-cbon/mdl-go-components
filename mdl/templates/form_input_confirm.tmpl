@@ -1,20 +1,20 @@
 {{define "mgc/form_input_confirm"}}
 <div
-  {{range .Component.Attr}}{{.Render}} {{end}}
+  {{range .Component.Attr}}{{.SafeName}}="{{.Value}}" {{end}}
   class="mdl-textfield custom-input-confirm custom-js-input-confirm
   {{if .Component.GetError}}is-invalid{{end}}
   {{.Component.Classes.Render}}
   ">
 
   <div
-    {{range .Component.InputLeft.Attr}}{{.Render}} {{end}}
+    {{range .Component.InputLeft.Attr}}{{.SafeName}}="{{.Value}}" {{end}}
     class="mdl-textfield mdl-js-textfield
     {{if not .Component.IsPlaceHolderOnly}}mdl-textfield--floating-label{{end}}
     {{if .Component.GetError}}is-invalid{{end}}
     {{.Component.InputLeft.Classes.Render}}
   ">
     <input
-      {{range .Component.InputLeft.InputAttr}}{{.Render}} {{end}}
+      {{range .Component.InputLeft.InputAttr}}{{.SafeName}}="{{.Value}}" {{end}}
       class="mdl-textfield__input {{.Component.InputLeft.InputClasses.Render}}"
       type="{{.Component.GetType}}"
       value="{{.Component.InputLeft.GetValue}}"
@@ -26,14 +26,14 @@
   </div>
 
   <div
-    {{range .Component.InputRight.Attr}}{{.Render}} {{end}}
+    {{range .Component.InputRight.Attr}}{{.SafeName}}="{{.Value}}" {{end}}
     class="mdl-textfield mdl-js-textfield
     {{if not .Component.IsPlaceHolderOnly}}mdl-textfield--floating-label{{end}}
     {{if .Component.GetError}}is-invalid{{end}}
     {{.Component.InputRight.Classes.Render}}
   ">
     <input
-      {{range .Component.InputRight.InputAttr}}{{.Render}} {{end}}
+      {{range .Component.InputRight.InputAttr}}{{.SafeName}}="{{.Value}}" {{end}}
       class="mdl-textfield__input {{.Component.InputRight.InputClasses.Render}}"
       type="{{.Component.GetType}}"
       value="{{.Component.InputRight.GetValue}}"

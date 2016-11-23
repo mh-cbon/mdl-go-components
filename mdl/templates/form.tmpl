@@ -1,6 +1,6 @@
 {{define "mgc/form"}}
   <form
-    {{range .Component.Attr}}{{.Render}} {{end}}
+    {{range .Component.Attr}}{{.SafeName}}="{{.Value}}" {{end}}
     class="{{.Component.Classes.Render}}">
     {{range .Component.Components}}
       {{.Render}}
