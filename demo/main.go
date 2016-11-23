@@ -26,7 +26,7 @@ func main() {
 var Demopath = ""
 
 func GuessPath() string {
-	p := guesspath.Path(Demopath, "")
+	p := guesspath.Path(Demopath, "", "")
 	if p == "" {
 		panic("path not matched")
 	}

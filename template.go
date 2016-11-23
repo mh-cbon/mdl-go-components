@@ -8,7 +8,12 @@ import (
 var Tplpath = ""
 
 func GuessGlob() string {
-	p := guesspath.Glob(Tplpath, "mdl/templates/", "*.tmpl")
+	p := guesspath.Glob(
+    Tplpath,
+    "github.com/mh-cbon/mdl-go-components",
+    "mdl/templates/",
+    "*.tmpl",
+  )
 	if p == "" {
 		panic("templates not found")
 	}
