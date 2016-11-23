@@ -48,7 +48,7 @@ func (view *Tag) Add(s mgc.ViewComponentRenderer) {
 
 func (view *Tag) Translate(t Translator) {
 	for _, c := range view.Components {
-		if v, ok := c.(ViewTranslator); ok {
+		if v, ok := c.(NodeTranslator); ok {
 			v.Translate(t)
 		}
 	}

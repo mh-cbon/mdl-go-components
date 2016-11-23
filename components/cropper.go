@@ -2,6 +2,7 @@ package components
 
 import (
 	mgc "github.com/mh-cbon/mdl-go-components"
+  "html/template"
 )
 
 type Cropper struct {
@@ -48,7 +49,17 @@ func NewCropper() *Cropper {
 	ret.Dialog.Content = Content
 	return ret
 }
-
+func (view *Cropper) Translate(t Translator) {
+	view.InputFile.Translate(t)
+	view.Dialog.Translate(t)
+}
+func (view *Cropper) SetErrors(p ErrorProvider) {
+  err := p.GetError(view.GetName())
+  if err!=nil {
+    view.SetError(err)
+  }
+	view.Dialog.SetErrors(p)
+}
 func (view *Cropper) Render(args ...interface{}) (string, error) {
 	view.GetRenderContext().SetDefaultTo(view.InputHidden)
 	view.GetRenderContext().SetDefaultTo(view.InputFile)
@@ -56,6 +67,9 @@ func (view *Cropper) Render(args ...interface{}) (string, error) {
 	return view.GetRenderContext().RenderComponent(view, args)
 }
 
+func (c *Cropper) GetCurrentImgAttr() template.HTMLAttr {
+	return template.HTMLAttr("src='"+c.CurrentImg+"'")
+}
 func (c *Cropper) GetCurrentImg() string {
 	return c.CurrentImg
 }
@@ -76,10 +90,10 @@ func (c *Cropper) SetDialogCloseText(b string, icon string) {
 	c.Dialog.SetCloseText(b, icon)
 }
 
-func (c *Cropper) SetError(s string) {
+func (c *Cropper) SetError(s interface{}) {
 	c.InputFile.SetError(s)
 }
-func (c *Cropper) GetError() string {
+func (c *Cropper) GetError() interface{} {
 	return c.InputFile.GetError()
 }
 func (c *Cropper) SetSafeLabel(s string) {
@@ -122,6 +136,12 @@ func (c *Cropper) SetResultInputName(b string) {
 func (c *Cropper) GetResultInputName() string {
 	return c.InputHidden.GetName()
 }
+func (c *Cropper) SetValue(b string) {
+	c.InputHidden.SetValue(b)
+}
+func (c *Cropper) GetValue() string {
+	return c.InputHidden.GetValue()
+}
 func (c *Cropper) SetResultMode(b string) {
 	c.InputHidden.Classes.Remove("custom-cropper-b64-result")
 	c.InputHidden.Classes.Remove("custom-cropper-data-result")
@@ -139,3 +159,54 @@ func (c *Cropper) GetResultMode() string {
 	}
 	return ""
 }
+func (c *Cropper) SetB64ExportWidth(b string) {
+  if b == "" {
+    c.Attr.Remove("b64-export-width")
+  } else {
+    c.Attr.Set("b64-export-width", b)
+  }
+}
+func (c *Cropper) SetB64ExportHeight(b string) {
+  if b == "" {
+    c.Attr.Remove("b64-export-height")
+  } else {
+    c.Attr.Set("b64-export-height", b)
+  }
+}
+func (c *Cropper) SetAspectRatio(b string) {
+  if b == "" {
+    c.Attr.Remove("aspect-ratio")
+  } else {
+    c.Attr.Set("aspect-ratio", b)
+  }
+}
+func (c *Cropper) SetMovable(b bool) {
+  if b {
+    c.Attr.Set("movable", "true")
+  } else {
+    c.Attr.Set("movable", "false")
+  }
+}
+func (c *Cropper) SetScalable(b bool) {
+  if b {
+    c.Attr.Set("scalable", "true")
+  } else {
+    c.Attr.Set("scalable", "false")
+  }
+}
+func (c *Cropper) SetRotatable(b bool) {
+  if b {
+    c.Attr.Set("rotatable", "true")
+  } else {
+    c.Attr.Set("rotatable", "false")
+  }
+}
+func (c *Cropper) SetDragMode(b string) {
+  if b == "" {
+    c.Attr.Remove("drag-mode")
+  } else {
+    c.Attr.Set("drag-mode", b)
+  }
+}
+// many more like this,
+// see https://github.com/mh-cbon/material-design-lite/blob/mdl-1.x/src/custom-cropper/cropper.js#L223

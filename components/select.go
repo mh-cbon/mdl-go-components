@@ -23,6 +23,13 @@ func NewSelect() *Select {
 	return ret
 }
 
+func (view *Select) SetErrors(p ErrorProvider) {
+	err := p.GetError(view.GetName())
+	if err!=nil {
+		view.SetError(err)
+	}
+}
+
 func (i *Select) SetIcon(s string) {
 	i.Icon = s
 }

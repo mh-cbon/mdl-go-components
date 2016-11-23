@@ -368,6 +368,13 @@ type DataTableRow struct {
 	Cells []*DataTableCell
 }
 
+func (l *DataTableRow) GetName() string {
+	return l.Attr.GetValue("name")
+}
+func (l *DataTableRow) SetName(name string) *DataTableRow {
+	l.Attr.Set("name", name)
+	return l
+}
 func (l *DataTableRow) GetCell(name string) *DataTableCell {
 	for _, cell := range l.Cells {
 		if cell.GetCellName() == name {

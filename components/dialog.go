@@ -49,9 +49,16 @@ func (view *Dialog) Translate(t Translator) {
   view.Cancel.Translate(t)
   view.Close.Translate(t)
   if view.Content!=nil {
-    if v, ok := view.Content.(ViewTranslator); ok {
+    if v, ok := view.Content.(NodeTranslator); ok {
       v.Translate(t)
     }
+  }
+}
+func (view *Dialog) SetErrors(p ErrorProvider) {
+  if view.Content!=nil {
+		if v, ok := view.Content.(NodeErrorsSetter); ok {
+			v.SetErrors(p)
+		}
   }
 }
 

@@ -53,6 +53,25 @@ func (view *Dup) SetDup(duped mgc.ViewComponentRenderer) {
 func (view *Dup) Add(some mgc.ViewComponentRenderer) {
 	view.Items = append(view.Items, some)
 }
+func (view *Dup) Translate(t Translator) {
+	for _, c := range view.Items {
+		if v, ok := c.(NodeTranslator); ok {
+			v.Translate(t)
+		}
+	}
+	if view.Duped != nil {
+		if v, ok := view.Duped.(NodeTranslator); ok {
+			v.Translate(t)
+		}
+	}
+}
+func (view *Dup) SetErrors(p ErrorProvider) {
+	for _, c := range view.Items {
+		if v, ok := c.(NodeErrorsSetter); ok {
+			v.SetErrors(p)
+		}
+	}
+}
 
 func (view *Dup) Render(args ...interface{}) (string, error) {
 	for _, v := range view.Items {

@@ -15,7 +15,7 @@ func TestCropper(t *testing.T) {
 
 	expectations := []string{
 		`<div\s+id="rnd-0"\s+class="custom-cropper custom-js-cropper\s+"\s+>`,
-		`<div\s+class="custom-cropper-current-img\s+">\s+<img\s+src="/static/avatar-1.png"\s+/>\s+</div>`,
+		`<div\s+class="custom-cropper-current-img\s+">\s+<img\s+src='/static/avatar-1.png'\s+/>\s+</div>`,
 		`<input\s+class="custom-cropper-b64-result"\s+type="hidden"\s+name="result"\s+value=""\s+/>`,
 		`<label\s+class="mdl-textfield__label"\s+for="rnd-2">base64 result</label>`,
 		`<span\s+class="mdl-textfield__error">beeep boop nop</span>`,

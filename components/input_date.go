@@ -27,6 +27,13 @@ func NewInputDate() *InputDate {
 	return ret
 }
 
+func (view *InputDate) SetErrors(p ErrorProvider) {
+	err := p.GetError(view.GetName())
+	if err!=nil {
+		view.SetError(err)
+	}
+}
+
 func (i *InputDate) SetGoFormat(b string) {
 	i.GoFormat = b
 }
@@ -48,6 +55,17 @@ func (view *InputDate) GetId() string {
 	return view.InputAttr.GetValue("id")
 }
 
+func (i *InputDate) SetDate(b time.Time) {
+	i.SetPresent(b)
+}
+func (i *InputDate) GetDate() (time.Time, error) {
+  d := i.GetPresent()
+	return *d, nil
+}
+func (i *InputDate) MustGetDate() time.Time {
+  d := i.GetPresent()
+	return *d
+}
 func (i *InputDate) SetPresent(b time.Time) {
 	i.HiddenAttr.Set("value", b.Format(i.GoFormat))
 }

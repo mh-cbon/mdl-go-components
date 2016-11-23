@@ -16,13 +16,6 @@ type InputSlice struct {
 	ItemBlock string
 }
 
-func (i *InputSlice) SetItemBlock(s string) {
-	i.ItemBlock = s
-}
-func (i *InputSlice) GetItemBlock() string {
-	return i.ItemBlock
-}
-
 func NewInputSlice() *InputSlice {
 	ret := &InputSlice{}
 	ret.SetBlock("mgc/form_input_slice")
@@ -47,6 +40,20 @@ func NewInputHiddenSlice() *InputSlice {
 	ret.SetItemBlock("mgc/form_hidden")
 	ret.SetType("hidden")
 	return ret
+}
+
+func (i *InputSlice) SetItemBlock(s string) {
+	i.ItemBlock = s
+}
+func (i *InputSlice) GetItemBlock() string {
+	return i.ItemBlock
+}
+
+func (view *InputSlice) SetErrors(p ErrorProvider) {
+	err := p.GetError(view.GetName())
+	if err!=nil {
+		view.SetError(err)
+	}
 }
 
 func (view *InputSlice) GetItem(index int, value string) *Input {

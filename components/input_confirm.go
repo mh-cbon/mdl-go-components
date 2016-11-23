@@ -43,9 +43,20 @@ func (view *InputConfirm) Render(args ...interface{}) (string, error) {
 	return view.GetRenderContext().RenderComponent(view, args)
 }
 
+func (view *InputConfirm) Translate(t Translator) {
+  view.InputLeft.Translate(t)
+  view.InputRight.Translate(t)
+}
+func (view *InputConfirm) SetErrors(p ErrorProvider) {
+	err := p.GetError(view.InputLeft.GetName())
+	if err!=nil {
+		view.SetError(err)
+	}
+}
+
 func (view *InputConfirm) SetName(b string) {
 	view.InputLeft.SetName(b)
-	view.InputRight.SetName("confirm-" + b)
+	view.InputRight.SetName("Confirm" + b)
 }
 
 type PartialInputConfirm struct {

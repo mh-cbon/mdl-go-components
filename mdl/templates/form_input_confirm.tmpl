@@ -1,7 +1,7 @@
 {{define "mgc/form_input_confirm"}}
 <div
   {{range .Component.Attr}}{{.Render}} {{end}}
-  class="mdl-textfield
+  class="mdl-textfield custom-input-confirm custom-js-input-confirm
   {{if .Component.GetError}}is-invalid{{end}}
   {{.Component.Classes.Render}}
   ">

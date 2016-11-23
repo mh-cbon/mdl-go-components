@@ -3,14 +3,14 @@ package components
 import (
 	"html/template"
 	"strconv"
+	"time"
 	"strings"
 )
 
 type Translator interface {
 	T(id string, args ...interface{}) string
 }
-
-type ViewTranslator interface {
+type NodeTranslator interface {
 	Translate(t Translator)
 }
 
@@ -23,8 +23,20 @@ type ValueSetter interface {
 	SetInt64Value(value int64)
 	SetUint64Value(value uint64)
 }
+type ValueDateSetter interface {
+	SetDate(s time.Time)
+  GetDate() (time.Time, error)
+  MustGetDate() time.Time
+}
 type ValueSliceSetter interface {
 	SetValues(s []string)
+}
+type ErrorProvider interface {
+  // GetFailure() interface{}
+  GetError(name string) interface{}
+}
+type NodeErrorsSetter interface {
+  SetErrors(provider ErrorProvider)
 }
 
 type ClassList []string
@@ -222,6 +234,19 @@ func (i *NodeSingleValue) SetInt64Value(value int64) {
 func (i *NodeSingleValue) SetUint64Value(value uint64) {
 	i.SetValue(strconv.FormatUint(value, 10))
 }
+func (i *NodeSingleValue) SetDate(b time.Time) {
+	i.SetValue(b.Format(time.RFC3339))
+}
+func (i *NodeSingleValue) GetDate() (time.Time, error) {
+	return time.Parse(time.RFC3339, i.GetValue())
+}
+func (i *NodeSingleValue) MustGetDate() time.Time {
+  t, err := time.Parse(time.RFC3339, i.GetValue())
+  if err !=nil{
+    panic(err)
+  }
+	return t
+}
 
 type NodeMutlipleValues struct {
 	Values []string
@@ -254,6 +279,9 @@ func (i *NodeWithOption) SetOption(option NodeOption) {
 }
 func (i *NodeWithOption) GetOption() *NodeOption {
 	return &i.Option
+}
+func (i *NodeWithOption) Translate(t Translator) {
+  i.Option.Translate(t)
 }
 
 type NodeWithOptions struct {
@@ -320,13 +348,12 @@ func (i *NodeOption) Eq(s string) bool {
 }
 
 type NodeSingleError struct {
-	Error string
+	Error interface{}
 }
-
-func (i *NodeSingleError) SetError(s string) {
+func (i *NodeSingleError) SetError(s interface{}) {
 	i.Error = s
 }
-func (i *NodeSingleError) GetError() string {
+func (i *NodeSingleError) GetError() interface{} {
 	return i.Error
 }
 

@@ -23,11 +23,17 @@ func (view *Form) Render(args ...interface{}) (string, error) {
 	}
 	return view.GetRenderContext().RenderComponent(view, args)
 }
-
 func (view *Form) Translate(t Translator) {
 	for _, c := range view.Components {
-		if v, ok := c.(ViewTranslator); ok {
+		if v, ok := c.(NodeTranslator); ok {
 			v.Translate(t)
+		}
+	}
+}
+func (view *Form) SetErrors(p ErrorProvider) {
+	for _, c := range view.Components {
+		if v, ok := c.(NodeErrorsSetter); ok {
+			v.SetErrors(p)
 		}
 	}
 }
@@ -60,7 +66,10 @@ func (view *Form) Get(name string) mgc.ViewComponentRenderer {
 	for _, c := range view.Components {
 		if v, ok := c.(Namer); ok {
 			if v.GetName()==name {
-    		view.GetRenderContext().SetDefaultTo(c)
+        r := view.GetRenderContext()
+        if r != nil {
+      		r.SetDefaultTo(c)
+        }
 				return c
 			}
 		}
@@ -95,6 +104,15 @@ func (view *Form) GetValueSetter(name string) ValueSetter {
 	c := view.Get(name)
 	if c !=nil {
 		if v, ok := c.(ValueSetter); ok {
+			return v
+		}
+	}
+	return nil
+}
+func (view *Form) GetValueDateSetter(name string) ValueDateSetter {
+	c := view.Get(name)
+	if c !=nil {
+		if v, ok := c.(ValueDateSetter); ok {
 			return v
 		}
 	}

@@ -28,6 +28,13 @@ func NewChipAutocomplete() *ChipAutocomplete {
 	return ret
 }
 
+func (view *ChipAutocomplete) Translate(t Translator) {
+	view.Input.Translate(t)
+}
+func (view *ChipAutocomplete) SetErrors(p ErrorProvider) {
+	view.Input.SetErrors(p)
+}
+
 func (view *ChipAutocomplete) Render(args ...interface{}) (string, error) {
 	view.GetRenderContext().SetDefaultTo(view.Input)
 	return view.GetRenderContext().RenderComponent(view, args)
@@ -40,10 +47,10 @@ func (c *ChipAutocomplete) GetName() string {
 	return c.GetOptionValueName()
 }
 
-func (c *ChipAutocomplete) SetError(s string) {
+func (c *ChipAutocomplete) SetError(s interface{}) {
 	c.Input.SetError(s)
 }
-func (c *ChipAutocomplete) GetError() string {
+func (c *ChipAutocomplete) GetError() interface{} {
 	return c.Input.GetError()
 }
 func (c *ChipAutocomplete) SetSafeLabel(s string) {

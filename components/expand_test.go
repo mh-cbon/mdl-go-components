@@ -34,7 +34,7 @@ func TestExpand(t *testing.T) {
 	expectations := []string{
 		`<div class="custom-js-expander custom-expander\s+">`,
 		`<div class="custom-expander-bt">\s+<label\s+class="mdl-checkbox mdl-js-checkbox "\s+for="id">\s+<input\s+name="name"\s+id="id"\s+type="checkbox"\s+value="valueopt"\s+class="mdl-checkbox__input "\s+/>\s+<span class="mdl-checkbox__label">labelopt</span>\s+</label>\s+</div>`,
-		`<div class="custom-expander-container">\s+<div\s+class="mdl-textfield\s+is-invalid\s+">`,
+		`<div class="custom-expander-container">\s+<div\s+class="mdl-textfield[^"]+">`,
 	}
 	validateComponent(t, expand, expectations)
 }

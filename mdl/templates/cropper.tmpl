@@ -9,7 +9,7 @@
   <div
     {{range .Component.CurrentImgAttr}}{{.Render}} {{end}}
     class="custom-cropper-current-img {{.Component.CurrentImgClasses.Render}}">
-    <img src="{{.Component.GetCurrentImg}}" />
+    <img {{.Component.GetCurrentImgAttr}} />
   </div>
   {{end}}
 

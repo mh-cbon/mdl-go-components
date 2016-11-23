@@ -24,6 +24,13 @@ func NewSlider() *Slider {
 	return ret
 }
 
+func (view *Slider) SetErrors(p ErrorProvider) {
+	err := p.GetError(view.GetName())
+	if err!=nil {
+		view.SetError(err)
+	}
+}
+
 func (view *Slider) SetMin(b string) {
 	view.InputAttr.Set("min", b)
 }

@@ -27,6 +27,11 @@ func (l *Tabs) Add(title string, content mgc.ViewComponentRenderer) *Tab {
 	l.Tabs = append(l.Tabs, tab)
 	return tab
 }
+func (l *Tabs) AddSlice(title string) *Slice {
+  slice := NewSlice()
+	l.Add(title, slice)
+  return slice
+}
 func (l *Tabs) SetActive(index int) {
 	for i, tab := range l.Tabs {
 		tab.SetActive(index == i)
@@ -37,9 +42,21 @@ func (view *Tabs) Render(args ...interface{}) (string, error) {
 		if tab.GetId() == "" {
 			tab.SetId("rnd-" + view.GetRenderContext().GetId())
 		}
-		view.GetRenderContext().SetDefaultTo(tab.Content)
+    view.GetRenderContext().SetDefaultTo(tab.Content)
 	}
 	return view.GetRenderContext().RenderComponent(view, args)
+}
+func (view *Tabs) Translate(t Translator) {
+	for _, tab := range view.Tabs {
+    tab.Translate(t)
+	}
+}
+func (view *Tabs) SetErrors(p ErrorProvider) {
+	for _, c := range view.Tabs {
+		if v, ok := c.Content.(NodeErrorsSetter); ok {
+			v.SetErrors(p)
+		}
+	}
 }
 
 type Tab struct {
@@ -81,4 +98,10 @@ func (t *Tab) GetContent() mgc.ViewComponentRenderer {
 }
 func (t *Tab) SetContent(b mgc.ViewComponentRenderer) {
 	t.Content = b
+}
+func (view *Tab) Translate(t Translator) {
+  view.Title = t.T(view.Title)
+	if v, ok := view.Content.(NodeTranslator); ok {
+		v.Translate(t)
+	}
 }

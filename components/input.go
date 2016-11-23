@@ -43,6 +43,13 @@ func NewInputPassword() *Input {
 	return ret
 }
 
+func (view *Input) SetErrors(p ErrorProvider) {
+	err := p.GetError(view.GetName())
+	if err!=nil {
+		view.SetError(err)
+	}
+}
+
 func (view *Input) SetName(b string) {
 	view.InputAttr.Set("name", b)
 }

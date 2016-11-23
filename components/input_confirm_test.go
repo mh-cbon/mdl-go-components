@@ -21,7 +21,7 @@ func TestInputConfirm(t *testing.T) {
 	input.InputRight.SetValue("Right value")
 
 	expectations := []string{
-		`<div\s+class="mdl-textfield\s+is-invalid\s+">`,
+		`<div\s+class="mdl-textfield\s+custom-input-confirm\s+custom-js-input-confirm\s+is-invalid\s+">`,
 		`<input\s+name="left-name"\s+id="left-id"\s+class="mdl-textfield__input "\s+type="text"\s+value="Left value"\s+>`,
 		`<label\s+class="mdl-textfield__label"\s+for="left-id"\s+>Left label</label>`,
 		`<input\s+name="right-name"\s+id="right-id"\s+class="mdl-textfield__input "\s+type="text"\s+value="Right value"\s+>`,

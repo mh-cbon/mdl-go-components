@@ -32,6 +32,13 @@ func NewRadioSlice() *CheckboxSlice {
 	return ret
 }
 
+func (view *CheckboxSlice) SetErrors(p ErrorProvider) {
+	err := p.GetError(view.GetName())
+	if err!=nil {
+		view.SetError(err)
+	}
+}
+
 func (i *CheckboxSlice) SetItemBlock(s string) {
 	i.ItemBlock = s
 }

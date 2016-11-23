@@ -6,6 +6,7 @@ import (
 
 type Checker interface {
 	IsChecked() bool
+	SetChecked(b bool)
 }
 
 type Expand struct {
@@ -23,18 +24,31 @@ func NewExpand() *Expand {
 }
 
 func (view *Expand) Translate(t Translator) {
-  if v, ok := view.Bt.(ViewTranslator); ok {
+  if v, ok := view.Bt.(NodeTranslator); ok {
     v.Translate(t)
   }
 	for _, c := range view.Children {
-		if v, ok := c.(ViewTranslator); ok {
+		if v, ok := c.(NodeTranslator); ok {
 			v.Translate(t)
 		}
 	}
 }
+func (view *Expand) SetErrors(p ErrorProvider) {
+  if v, ok := view.Bt.(NodeErrorsSetter); ok {
+    v.SetErrors(p)
+  }
+	for _, c := range view.Children {
+		if v, ok := c.(NodeErrorsSetter); ok {
+			v.SetErrors(p)
+		}
+	}
+}
 
-func (view *Expand) AddChild(some mgc.ViewComponentRenderer) {
+func (view *Expand) Add(some mgc.ViewComponentRenderer) {
 	view.Children = append(view.Children, some)
+}
+func (view *Expand) AddChild(some mgc.ViewComponentRenderer) {
+	view.Add(some)
 }
 
 func (view *Expand) SetBt(b mgc.ViewComponentRenderer) {
@@ -46,6 +60,11 @@ func (view *Expand) SetBt(b mgc.ViewComponentRenderer) {
 
 func (view *Expand) SetExpanded(b bool) {
 	view.Expanded = b
+	if view.Bt != nil {
+		if v, ok := view.Bt.(Checker); ok {
+			v.SetChecked(b)
+		}
+	}
 }
 func (view *Expand) IsExpanded() bool {
 	return view.Expanded

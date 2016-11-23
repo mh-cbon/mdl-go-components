@@ -28,6 +28,13 @@ func NewInputFile() *InputFile {
 	return ret
 }
 
+func (view *InputFile) SetErrors(p ErrorProvider) {
+	err := p.GetError(view.GetName())
+	if err!=nil {
+		view.SetError(err)
+	}
+}
+
 func (view *InputFile) SetClearIcon(b string) {
 	view.ClearIcon = b
 }
