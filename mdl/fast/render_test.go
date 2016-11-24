@@ -2,6 +2,7 @@ package fast_test
 
 import (
 	"bytes"
+	"os"
 	"testing"
 
 	mgc "github.com/mh-cbon/mdl-go-components"
@@ -42,4 +43,24 @@ func BenchmarkRenderWithFast(b *testing.B) {
 		buttonB.Render()
 		(fastBuffer).Reset()
 	}
+}
+
+func TestButtonHref(t *testing.T) {
+	input := components.NewButton()
+	input.SetLabel("label")
+	input.SetName("name")
+	input.SetId("id")
+	input.SetLink("http://whatever")
+
+	// expectations := []string{
+	// 	`<a[^>]+>label</a>`,
+	// 	`<a[^>]+name="name"[^>]+>label</a>`,
+	// 	`<a[^>]+href="http://whatever"[^>]+>label</a>`,
+	// 	`<a[^>]+class="mdl-button mdl-js-button"[^>]+>label</a>`,
+	// 	`<a[^>]+id="id"[^>]+>label</a>`,
+	// }
+	fastRenderer := fast.NewRenderContext(mgc.MustTemplate(), os.Stdout)
+	fastRenderer.Register(fast.NewButtonRenderer())
+	fastRenderer.AttachTo(buttonB)
+	buttonB.Render()
 }
