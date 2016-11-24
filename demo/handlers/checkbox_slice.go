@@ -1,9 +1,10 @@
 package handlers
 
 import (
+	"net/http"
+
 	mgc "github.com/mh-cbon/mdl-go-components"
 	"github.com/mh-cbon/mdl-go-components/components"
-	"net/http"
 )
 
 func Checkbox_slice(w http.ResponseWriter, r *http.Request) {
@@ -23,7 +24,7 @@ func Checkbox_slice(w http.ResponseWriter, r *http.Request) {
 	t1.AddOption("value", "label")
 	t1.AddOption("value2", "label2")
 	t1.SetValues([]string{"value"})
-	line.Add(t1)
+	line.AddComponent(t1)
 	data.Components = append(data.Components, line)
 
 	// -
@@ -34,7 +35,7 @@ func Checkbox_slice(w http.ResponseWriter, r *http.Request) {
 	t1.AddOption("value", "label")
 	t1.AddOption("value2", "label2")
 	t1.SetValues([]string{"value"})
-	line.Add(t1)
+	line.AddComponent(t1)
 	data.Components = append(data.Components, line)
 
 	// -
@@ -45,7 +46,7 @@ func Checkbox_slice(w http.ResponseWriter, r *http.Request) {
 	t1.AddOption("value", "label")
 	t1.AddOption("value2", "label2")
 	t1.SetValues([]string{"value"})
-	line.Add(t1)
+	line.AddComponent(t1)
 	data.Components = append(data.Components, line)
 
 	// -
@@ -55,7 +56,7 @@ func Checkbox_slice(w http.ResponseWriter, r *http.Request) {
 	t1.AddOption("value", "label")
 	t1.AddOption("value2", "label2")
 	t1.SetValues([]string{"value"})
-	line.Add(t1)
+	line.AddComponent(t1)
 	data.Components = append(data.Components, line)
 
 	// -
@@ -66,7 +67,7 @@ func Checkbox_slice(w http.ResponseWriter, r *http.Request) {
 	t1.AddOption("value", "label")
 	t1.AddOption("value2", "label2")
 	t1.SetValues([]string{"value"})
-	line.Add(t1)
+	line.AddComponent(t1)
 	data.Components = append(data.Components, line)
 
 	// -
@@ -77,7 +78,7 @@ func Checkbox_slice(w http.ResponseWriter, r *http.Request) {
 	t1.AddOption("value", "label")
 	t1.AddOption("value2", "label2")
 	t1.SetValues([]string{"value"})
-	line.Add(t1)
+	line.AddComponent(t1)
 	data.Components = append(data.Components, line)
 
 	// -

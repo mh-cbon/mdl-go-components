@@ -2,7 +2,7 @@
   <form
     {{range .Component.Attr}}{{.SafeName}}="{{.Value}}" {{end}}
     class="{{.Component.Classes.Render}}">
-    {{range .Component.Components}}
+    {{range .Component.GetComponents}}
       {{.Render}}
     {{end}}
   </form>

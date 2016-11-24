@@ -2,8 +2,8 @@
   {{.Component.OpenTag}}
     {{range .Component.Attr}}{{.SafeName}}="{{.Value}}" {{end}}
     class="{{.Component.Classes.Render}}"
-    {{.Component.OpenTagClose}}
-  {{range .Component.Components}}
+  {{.Component.OpenTagClose}}
+  {{range .Component.GetComponents}}
     {{.Render}}
   {{end}}
   {{.Component.CloseTag}}

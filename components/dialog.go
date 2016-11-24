@@ -2,15 +2,16 @@ package components
 
 import (
 	mgc "github.com/mh-cbon/mdl-go-components"
+	base "github.com/mh-cbon/mdl-go-components/components_common"
 )
 
 type Dialog struct {
 	mgc.ViewComponent
-	Node
+	base.Node
 
 	Title            string
-	BgClasses        ClassList
-	ContainerClasses ClassList
+	BgClasses        base.ClassList
+	ContainerClasses base.ClassList
 
 	Content mgc.ViewComponentRenderer
 	Ok      *Button
@@ -44,22 +45,22 @@ func (view *Dialog) SetBgContainerColor(colorname string) {
 	view.ContainerClasses.Add("mdl-color--" + colorname)
 }
 
-func (view *Dialog) Translate(t Translator) {
-  view.Ok.Translate(t)
-  view.Cancel.Translate(t)
-  view.Close.Translate(t)
-  if view.Content!=nil {
-    if v, ok := view.Content.(NodeTranslator); ok {
-      v.Translate(t)
-    }
-  }
+func (view *Dialog) Translate(t base.Translator) {
+	view.Ok.Translate(t)
+	view.Cancel.Translate(t)
+	view.Close.Translate(t)
+	if view.Content != nil {
+		if v, ok := view.Content.(base.NodeTranslator); ok {
+			v.Translate(t)
+		}
+	}
 }
-func (view *Dialog) SetErrors(p ErrorProvider) {
-  if view.Content!=nil {
-		if v, ok := view.Content.(NodeErrorsSetter); ok {
+func (view *Dialog) SetErrors(p base.ErrorProvider) {
+	if view.Content != nil {
+		if v, ok := view.Content.(base.NodeErrorsSetter); ok {
 			v.SetErrors(p)
 		}
-  }
+	}
 }
 
 func (view *Dialog) SetTitle(t string) {

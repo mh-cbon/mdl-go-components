@@ -2,26 +2,28 @@ package components
 
 import (
 	mgc "github.com/mh-cbon/mdl-go-components"
+	base "github.com/mh-cbon/mdl-go-components/components_common"
 )
 
 type Dup struct {
 	mgc.ViewComponent
-	Node
+	base.Node
+	*ComponentWithAComponentsSlice
 
 	Duped mgc.ViewComponentRenderer
-	Items []mgc.ViewComponentRenderer
 
-	BtRemoveAttr    AttrList
-	BtRemoveClasses ClassList
+	BtRemoveAttr    base.AttrList
+	BtRemoveClasses base.ClassList
 	BtRemoveText    string
 
-	BtAddAttr    AttrList
-	BtAddClasses ClassList
+	BtAddAttr    base.AttrList
+	BtAddClasses base.ClassList
 	BtAddText    string
 }
 
 func NewDup() *Dup {
 	ret := &Dup{}
+	ret.ComponentWithAComponentsSlice = NewComponentWithAComponentsSlice()
 	ret.SetBlock("mgc/dup")
 	return ret
 }
@@ -50,33 +52,23 @@ func (view *Dup) SetDup(duped mgc.ViewComponentRenderer) {
 	view.Duped = duped
 }
 
-func (view *Dup) Add(some mgc.ViewComponentRenderer) {
-	view.Items = append(view.Items, some)
+func (view *Dup) AddComponent(some mgc.ViewComponentRenderer) {
+	view.Components.AddComponent(some)
 }
-func (view *Dup) Translate(t Translator) {
-	for _, c := range view.Items {
-		if v, ok := c.(NodeTranslator); ok {
-			v.Translate(t)
-		}
-	}
+func (view *Dup) Translate(t base.Translator) {
+	view.Components.Translate(t)
 	if view.Duped != nil {
-		if v, ok := view.Duped.(NodeTranslator); ok {
+		if v, ok := view.Duped.(base.NodeTranslator); ok {
 			v.Translate(t)
 		}
 	}
 }
-func (view *Dup) SetErrors(p ErrorProvider) {
-	for _, c := range view.Items {
-		if v, ok := c.(NodeErrorsSetter); ok {
-			v.SetErrors(p)
-		}
-	}
+func (view *Dup) SetErrors(p base.ErrorProvider) {
+	view.Components.SetErrors(p)
 }
 
 func (view *Dup) Render(args ...interface{}) (string, error) {
-	for _, v := range view.Items {
-		view.GetRenderContext().SetDefaultTo(v)
-	}
+	view.GetRenderContext().SetDefaultTo(view.Components)
 	if view.Duped != nil {
 		ctx := &DupRenderContext{
 			b:               view.GetId(),
@@ -100,7 +92,7 @@ func (ctx *DupRenderContext) RenderComponent(view mgc.ViewComponentRenderer, arg
 	}
 	return ctx.ContextRenderer.RenderComponent(view, args)
 }
-func (ctx *DupRenderContext) SetDefaultTo(view mgc.ViewComponentRenderer) {
+func (ctx *DupRenderContext) SetDefaultTo(view mgc.ViewComponentContextSetter) {
 	if v, ok := view.(mgc.Ider); ok {
 		if v.GetId() == "" {
 			v.SetId(ctx.b + "-" + ctx.ContextRenderer.GetId() + "-$incrIndex$")
@@ -108,7 +100,7 @@ func (ctx *DupRenderContext) SetDefaultTo(view mgc.ViewComponentRenderer) {
 	}
 	view.SetDefaultRenderContext(ctx)
 }
-func (ctx *DupRenderContext) AttachTo(view mgc.ViewComponentRenderer) {
+func (ctx *DupRenderContext) AttachTo(view mgc.ViewComponentContextSetter) {
 	if v, ok := view.(mgc.Ider); ok {
 		if v.GetId() == "" {
 			v.SetId(ctx.b + "-" + ctx.ContextRenderer.GetId() + "-$incrIndex$")

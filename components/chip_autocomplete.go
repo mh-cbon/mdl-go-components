@@ -2,20 +2,22 @@ package components
 
 import (
 	"encoding/json"
+
 	mgc "github.com/mh-cbon/mdl-go-components"
+	base "github.com/mh-cbon/mdl-go-components/components_common"
 )
 
 type ChipAutocomplete struct {
 	mgc.ViewComponent
 
-	Node
-	NodeWithOptions
+	base.Node
+	base.NodeWithOptions
 
-	ResultsAttr    AttrList
-	ResultsClasses ClassList
+	ResultsAttr    base.AttrList
+	ResultsClasses base.ClassList
 
-	SelectAttr    AttrList
-	SelectClasses ClassList
+	SelectAttr    base.AttrList
+	SelectClasses base.ClassList
 
 	Input *Input
 }
@@ -28,11 +30,15 @@ func NewChipAutocomplete() *ChipAutocomplete {
 	return ret
 }
 
-func (view *ChipAutocomplete) Translate(t Translator) {
+func (view *ChipAutocomplete) Translate(t base.Translator) {
 	view.Input.Translate(t)
+	view.NodeWithOptions.Translate(t)
 }
-func (view *ChipAutocomplete) SetErrors(p ErrorProvider) {
-	view.Input.SetErrors(p)
+func (view *ChipAutocomplete) SetErrors(p base.ErrorProvider) {
+	err := p.GetError(view.GetName())
+	if err != nil {
+		view.SetError(err)
+	}
 }
 
 func (view *ChipAutocomplete) Render(args ...interface{}) (string, error) {
@@ -96,10 +102,10 @@ func (c *ChipAutocomplete) SetUrlCreator(b string) {
 	c.Attr.Set("url-creator", b)
 }
 func (c *ChipAutocomplete) GetUrlCreatorArgs() string {
-	return c.Attr.GetValue("url-completer-args")
+	return c.Attr.GetValue("url-creator-args")
 }
 func (c *ChipAutocomplete) SetUrlCreatorArgs(b string) {
-	c.Attr.Set("url-completer-args", b)
+	c.Attr.Set("url-creator-args", b)
 }
 func (c *ChipAutocomplete) SetEncodedUrlCreatorArgs(b interface{}) error {
 	bolB, err := json.Marshal(b)

@@ -2,15 +2,16 @@ package components
 
 import (
 	mgc "github.com/mh-cbon/mdl-go-components"
+	base "github.com/mh-cbon/mdl-go-components/components_common"
 )
 
 type Tabs struct {
 	mgc.ViewComponent
-	Node
+	base.Node
 	Tabs []*Tab
 
-	MenuClasses ClassList
-	MenuAttr    AttrList
+	MenuClasses base.ClassList
+	MenuAttr    base.AttrList
 }
 
 func NewTabs() *Tabs {
@@ -19,18 +20,15 @@ func NewTabs() *Tabs {
 	return ret
 }
 
-func (l *Tabs) Add(title string, content mgc.ViewComponentRenderer) *Tab {
+func (l *Tabs) AddTab(title string) *Tab {
 	tab := NewTab()
 	tab.SetTitle(title)
-	tab.SetContent(content)
 	tab.SetActive(len(l.Tabs) == 0)
 	l.Tabs = append(l.Tabs, tab)
 	return tab
 }
-func (l *Tabs) AddSlice(title string) *Slice {
-  slice := NewSlice()
-	l.Add(title, slice)
-  return slice
+func (l *Tabs) At(index int) *Tab {
+	return l.Tabs[index]
 }
 func (l *Tabs) SetActive(index int) {
 	for i, tab := range l.Tabs {
@@ -42,34 +40,34 @@ func (view *Tabs) Render(args ...interface{}) (string, error) {
 		if tab.GetId() == "" {
 			tab.SetId("rnd-" + view.GetRenderContext().GetId())
 		}
-    view.GetRenderContext().SetDefaultTo(tab.Content)
+		view.GetRenderContext().SetDefaultTo(tab.Components)
 	}
 	return view.GetRenderContext().RenderComponent(view, args)
 }
-func (view *Tabs) Translate(t Translator) {
+func (view *Tabs) Translate(t base.Translator) {
 	for _, tab := range view.Tabs {
-    tab.Translate(t)
+		tab.Translate(t)
 	}
 }
-func (view *Tabs) SetErrors(p ErrorProvider) {
-	for _, c := range view.Tabs {
-		if v, ok := c.Content.(NodeErrorsSetter); ok {
-			v.SetErrors(p)
-		}
+func (view *Tabs) SetErrors(p base.ErrorProvider) {
+	for _, tab := range view.Tabs {
+		tab.SetErrors(p)
 	}
 }
 
 type Tab struct {
-	Node
-	Title   string
-	Content mgc.ViewComponentRenderer
+	base.Node
+	*ComponentWithAComponentsSlice
 
-	TitleClasses ClassList
-	TitleAttr    AttrList
+	Title string
+
+	TitleClasses base.ClassList
+	TitleAttr    base.AttrList
 }
 
 func NewTab() *Tab {
 	ret := &Tab{}
+	ret.ComponentWithAComponentsSlice = NewComponentWithAComponentsSlice()
 	return ret
 }
 
@@ -93,15 +91,10 @@ func (t *Tab) SetTitle(b string) {
 	t.Title = b
 }
 
-func (t *Tab) GetContent() mgc.ViewComponentRenderer {
-	return t.Content
+func (view *Tab) SetErrors(p base.ErrorProvider) {
+	view.Components.SetErrors(p)
 }
-func (t *Tab) SetContent(b mgc.ViewComponentRenderer) {
-	t.Content = b
-}
-func (view *Tab) Translate(t Translator) {
-  view.Title = t.T(view.Title)
-	if v, ok := view.Content.(NodeTranslator); ok {
-		v.Translate(t)
-	}
+func (view *Tab) Translate(t base.Translator) {
+	view.Title = t.T(view.Title)
+	view.Components.Translate(t)
 }

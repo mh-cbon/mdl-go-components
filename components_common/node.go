@@ -1,9 +1,8 @@
-package components
+package components_common
 
 import (
 	"html/template"
 	"strconv"
-	"strings"
 	"time"
 )
 
@@ -30,6 +29,22 @@ type ValueDateSetter interface {
 }
 type ValueSliceSetter interface {
 	SetValues(s []string)
+	SetIntValues(s []int)
+	SetInt64Values(s []int64)
+	SetUint64Values(s []uint64)
+}
+type Optionner interface {
+	SetOptions(s []*NodeOption)
+	GetOptions() []*NodeOption
+	AddOption(value string, label string)
+	AddIntOption(value int, label string)
+	AddInt64Option(value int64, label string)
+	AddUint64Option(value uint64, label string)
+	GetOptionForValue(s string) *NodeOption
+	CheckOptions(values []string)
+	CheckIntOptions(values []int)
+	CheckInt64Options(values []int64)
+	CheckUint64Options(values []uint64)
 }
 type ErrorProvider interface {
 	// GetFailure() interface{}
@@ -37,145 +52,6 @@ type ErrorProvider interface {
 }
 type NodeErrorsSetter interface {
 	SetErrors(provider ErrorProvider)
-}
-
-type ClassList []string
-
-func (c *ClassList) Contains(some string) bool {
-	if some == "" {
-		return false
-	}
-	for _, v := range *c {
-		if v == some {
-			return true
-		}
-	}
-	return false
-}
-func (c *ClassList) Add(some string) {
-	for _, s := range strings.Split(some, " ") {
-		if c.Contains(s) == false {
-			*c = append(*c, s)
-		}
-	}
-}
-func (c *ClassList) Toggle(some string) {
-	for _, s := range strings.Split(some, " ") {
-		if c.Contains(s) {
-			c.Remove(s)
-		} else {
-			c.Add(s)
-		}
-	}
-}
-func (c *ClassList) Remove(some string) {
-	for _, s := range strings.Split(some, " ") {
-		for i, v := range *c {
-			if v == s {
-				k := *c
-				*c = append(k[:i], k[i+1:]...)
-				break
-			}
-		}
-	}
-}
-func (c *ClassList) RemoveStartingWith(some string) {
-	for _, s := range strings.Split(some, " ") {
-		for i, v := range *c {
-			if len(v) >= len(s) && v[0:len(s)] == s {
-				k := *c
-				*c = append(k[:i], k[i+1:]...)
-				break
-			}
-		}
-	}
-}
-func (c *ClassList) CopyFrom(some ClassList) {
-	k := *c
-	*c = k[0:0]
-	for _, v := range some {
-		c.Add(v)
-	}
-}
-func (c *ClassList) MergeFrom(some ClassList) {
-	for _, v := range some {
-		c.Add(v)
-	}
-}
-func (c *ClassList) Render() string {
-	ret := ""
-	for _, v := range *c {
-		ret += v + " "
-	}
-	if len(ret) > 0 {
-		return ret[0 : len(ret)-1]
-	}
-	return ret
-}
-
-type AttributeNode struct {
-	Name  string
-	Value string
-}
-
-func (c AttributeNode) SafeName() interface{} {
-	return template.HTMLAttr(c.Name)
-}
-
-type AttrList []*AttributeNode
-
-func (c *AttrList) Has(name string) bool {
-	for _, v := range *c {
-		if v.Name == name {
-			return true
-		}
-	}
-	return false
-}
-func (c *AttrList) Get(name string) *AttributeNode {
-	for _, v := range *c {
-		if v.Name == name {
-			return v
-		}
-	}
-	return nil
-}
-func (c *AttrList) GetValue(name string) string {
-	if attr := c.Get(name); attr != nil {
-		return attr.Value
-	}
-	return ""
-}
-func (c *AttrList) Set(name string, value string) {
-	if attr := c.Get(name); attr == nil {
-		*c = append(*c, &AttributeNode{
-			Name:  name,
-			Value: value,
-		})
-	} else {
-		attr.Value = value
-	}
-}
-func (c *AttrList) Remove(name string) {
-	for i, v := range *c {
-		if v.Name == name {
-			k := *c
-			*c = append(k[:i], k[i+1:]...)
-			break
-		}
-	}
-}
-func (c *AttrList) CopyFrom(some AttrList) {
-	for _, v := range some {
-		c.Set(v.Name, v.Value)
-	}
-}
-func (c *AttrList) MergeFrom(some AttrList) {
-	for _, v := range some {
-		if c.Has(v.Name) == false {
-			c.Set(v.Name, v.Value)
-		}
-	}
 }
 
 type Node struct {
@@ -254,9 +130,6 @@ type NodeMutlipleValues struct {
 func (i *NodeMutlipleValues) SetValue(s string) {
 	i.Values = []string{s}
 }
-func (i *NodeMutlipleValues) SetValues(s []string) {
-	i.Values = s
-}
 func (i *NodeMutlipleValues) GetValues() []string {
 	return i.Values
 }
@@ -267,6 +140,30 @@ func (i *NodeMutlipleValues) HasValue(s string) bool {
 		}
 	}
 	return false
+}
+func (i *NodeMutlipleValues) SetValues(s []string) {
+	i.Values = s
+}
+func (i *NodeMutlipleValues) SetIntValues(values []int) {
+	sValues := make([]string, 0)
+	for _, v := range values {
+		sValues = append(sValues, strconv.Itoa(v))
+	}
+	i.SetValues(sValues)
+}
+func (i *NodeMutlipleValues) SetInt64Values(values []int64) {
+	sValues := make([]string, 0)
+	for _, v := range values {
+		sValues = append(sValues, strconv.FormatInt(v, 10))
+	}
+	i.SetValues(sValues)
+}
+func (i *NodeMutlipleValues) SetUint64Values(values []uint64) {
+	sValues := make([]string, 0)
+	for _, v := range values {
+		sValues = append(sValues, strconv.FormatUint(v, 10))
+	}
+	i.SetValues(sValues)
 }
 
 type NodeWithOption struct {
@@ -299,8 +196,14 @@ func (i *NodeWithOptions) AddOption(value string, label string) {
 		NodeSingleValue: NodeSingleValue{Value: value},
 	})
 }
+func (i *NodeWithOptions) AddIntOption(value int, label string) {
+	i.AddOption(strconv.Itoa(value), label)
+}
 func (i *NodeWithOptions) AddInt64Option(value int64, label string) {
 	i.AddOption(strconv.FormatInt(value, 10), label)
+}
+func (i *NodeWithOptions) AddUint64Option(value uint64, label string) {
+	i.AddOption(strconv.FormatUint(value, 10), label)
 }
 func (i *NodeWithOptions) GetOptionForValue(s string) *NodeOption {
 	for _, v := range i.Options {
@@ -317,6 +220,27 @@ func (i *NodeWithOptions) CheckOptions(values []string) {
 			option.SetChecked(true)
 		}
 	}
+}
+func (i *NodeWithOptions) CheckIntOptions(values []int) {
+	sValues := make([]string, 0)
+	for _, v := range values {
+		sValues = append(sValues, strconv.Itoa(v))
+	}
+	i.CheckOptions(sValues)
+}
+func (i *NodeWithOptions) CheckInt64Options(values []int64) {
+	sValues := make([]string, 0)
+	for _, v := range values {
+		sValues = append(sValues, strconv.FormatInt(v, 10))
+	}
+	i.CheckOptions(sValues)
+}
+func (i *NodeWithOptions) CheckUint64Options(values []uint64) {
+	sValues := make([]string, 0)
+	for _, v := range values {
+		sValues = append(sValues, strconv.FormatUint(v, 10))
+	}
+	i.CheckOptions(sValues)
 }
 func (i *NodeWithOptions) SetValue(s string) {
 	i.CheckOptions([]string{s})

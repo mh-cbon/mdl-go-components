@@ -2,16 +2,17 @@ package components
 
 import (
 	mgc "github.com/mh-cbon/mdl-go-components"
+	base "github.com/mh-cbon/mdl-go-components/components_common"
 )
 
 type InputConfirm struct {
 	mgc.ViewComponent
-	NodeType
-	NodePlaceholder
-	NodeSingleError
+	base.NodeType
+	base.NodePlaceholder
+	base.NodeSingleError
 
-	Attr    AttrList
-	Classes ClassList
+	Attr    base.AttrList
+	Classes base.ClassList
 
 	InputLeft  *PartialInputConfirm
 	InputRight *PartialInputConfirm
@@ -38,18 +39,22 @@ func NewInputConfirmPassword() *InputConfirm {
 }
 
 func (view *InputConfirm) Render(args ...interface{}) (string, error) {
-	view.InputLeft.SetId("left-" + view.GetRenderContext().GetId())
-	view.InputRight.SetId("right-" + view.GetRenderContext().GetId())
+	if view.InputLeft.GetId() == "" {
+		view.InputLeft.SetId("left-" + view.GetRenderContext().GetId())
+	}
+	if view.InputRight.GetId() == "" {
+		view.InputRight.SetId("right-" + view.GetRenderContext().GetId())
+	}
 	return view.GetRenderContext().RenderComponent(view, args)
 }
 
-func (view *InputConfirm) Translate(t Translator) {
-  view.InputLeft.Translate(t)
-  view.InputRight.Translate(t)
+func (view *InputConfirm) Translate(t base.Translator) {
+	view.InputLeft.Translate(t)
+	view.InputRight.Translate(t)
 }
-func (view *InputConfirm) SetErrors(p ErrorProvider) {
+func (view *InputConfirm) SetErrors(p base.ErrorProvider) {
 	err := p.GetError(view.InputLeft.GetName())
-	if err!=nil {
+	if err != nil {
 		view.SetError(err)
 	}
 }
@@ -59,13 +64,17 @@ func (view *InputConfirm) SetName(b string) {
 	view.InputRight.SetName("Confirm" + b)
 }
 
-type PartialInputConfirm struct {
-	Node
-	NodeLabel
-	NodeSingleValue
+func (view *InputConfirm) GetName() string {
+	return view.InputLeft.GetName()
+}
 
-	InputAttr    AttrList
-	InputClasses ClassList
+type PartialInputConfirm struct {
+	base.Node
+	base.NodeLabel
+	base.NodeSingleValue
+
+	InputAttr    base.AttrList
+	InputClasses base.ClassList
 }
 
 func (view *PartialInputConfirm) SetName(b string) {

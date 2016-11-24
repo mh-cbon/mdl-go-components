@@ -2,10 +2,11 @@ package handlers
 
 import (
 	"encoding/json"
-	mgc "github.com/mh-cbon/mdl-go-components"
-	"github.com/mh-cbon/mdl-go-components/components"
 	"net/http"
 	"strconv"
+
+	mgc "github.com/mh-cbon/mdl-go-components"
+	"github.com/mh-cbon/mdl-go-components/components"
 )
 
 func ChipAutocomplete(w http.ResponseWriter, r *http.Request) {
@@ -28,7 +29,7 @@ func ChipAutocomplete(w http.ResponseWriter, r *http.Request) {
 	t1.SetUrlCompleter("/chip_autocomplete_list?input=itsinput")
 	t1.SetUrlCreator("/chip_autocomplete_create")
 
-	line.Add(t1)
+	line.AddComponent(t1)
 	data.Components = append(data.Components, line)
 
 	// -
@@ -42,7 +43,7 @@ func ChipAutocomplete(w http.ResponseWriter, r *http.Request) {
 	t1.AddOption("value", "text")
 	t1.AddOption("value2", "text 2")
 
-	line.Add(t1)
+	line.AddComponent(t1)
 	data.Components = append(data.Components, line)
 
 	// -

@@ -2,15 +2,16 @@ package components
 
 import (
 	mgc "github.com/mh-cbon/mdl-go-components"
+	base "github.com/mh-cbon/mdl-go-components/components_common"
 )
 
 type Checkbox struct {
 	mgc.ViewComponent
-	Node
-	NodeType
-	NodeWithOption
-	InputClasses ClassList
-	InputAttr    AttrList
+	base.Node
+	base.NodeType
+	base.NodeWithOption
+	InputClasses base.ClassList
+	InputAttr    base.AttrList
 }
 
 func NewCheckbox() *Checkbox {

@@ -1,8 +1,9 @@
 package components_test
 
 import (
-	"github.com/mh-cbon/mdl-go-components/components"
 	"testing"
+
+	"github.com/mh-cbon/mdl-go-components/components"
 )
 
 func TestExpand(t *testing.T) {
@@ -29,7 +30,7 @@ func TestExpand(t *testing.T) {
 	child.InputRight.SetId("right-id")
 	child.InputRight.SetLabel("Right label")
 	child.InputRight.SetValue("Right value")
-	expand.AddChild(child)
+	expand.AddComponent(child)
 
 	expectations := []string{
 		`<div class="custom-js-expander custom-expander\s+">`,
@@ -50,8 +51,8 @@ func TestExpand_Expanded(t *testing.T) {
 
 	text := components.NewText()
 	text.SetContent("hello content!")
-	expand.AddChild(text)
-	expand.AddChild(text) // yes, twice!
+	expand.AddComponent(text)
+	expand.AddComponent(text) // yes, twice!
 
 	expectations := []string{
 		`<div class="custom-js-expander custom-expander\s+">`,

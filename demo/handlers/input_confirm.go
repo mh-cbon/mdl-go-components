@@ -1,9 +1,10 @@
 package handlers
 
 import (
+	"net/http"
+
 	mgc "github.com/mh-cbon/mdl-go-components"
 	"github.com/mh-cbon/mdl-go-components/components"
-	"net/http"
 )
 
 func InputConfirm(w http.ResponseWriter, r *http.Request) {
@@ -23,7 +24,7 @@ func InputConfirm(w http.ResponseWriter, r *http.Request) {
 	t1.InputLeft.SetLabel("Type the text")
 	t1.InputRight.SetLabel("Type again")
 	t1.InputRight.SetName("right")
-	line.Add(t1)
+	line.AddComponent(t1)
 	data.Components = append(data.Components, line)
 
 	// -
@@ -34,7 +35,7 @@ func InputConfirm(w http.ResponseWriter, r *http.Request) {
 	t1.InputRight.SetLabel("Type again")
 	t1.InputRight.SetName("right")
 	t1.SetPlaceHolderOnly(true)
-	line.Add(t1)
+	line.AddComponent(t1)
 	data.Components = append(data.Components, line)
 
 	// -
@@ -46,7 +47,7 @@ func InputConfirm(w http.ResponseWriter, r *http.Request) {
 	t1.InputRight.SetLabel("Type again")
 	t1.InputRight.SetName("right")
 	t1.SetError("Oh no")
-	line.Add(t1)
+	line.AddComponent(t1)
 	data.Components = append(data.Components, line)
 
 	// -

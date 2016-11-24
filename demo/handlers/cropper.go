@@ -4,12 +4,13 @@ import (
 	"bytes"
 	"encoding/json"
 	"fmt"
-	mgc "github.com/mh-cbon/mdl-go-components"
-	"github.com/mh-cbon/mdl-go-components/components"
-	"github.com/vincent-petithory/dataurl"
 	"image/png"
 	"io/ioutil"
 	"net/http"
+
+	mgc "github.com/mh-cbon/mdl-go-components"
+	"github.com/mh-cbon/mdl-go-components/components"
+	"github.com/vincent-petithory/dataurl"
 )
 
 func Cropper(w http.ResponseWriter, r *http.Request) {
@@ -32,14 +33,14 @@ func Cropper(w http.ResponseWriter, r *http.Request) {
 	t1.SetLabel("base64 result")
 
 	form = components.NewForm()
-	form.Add(t1)
+	form.AddComponent(t1)
 
 	form.SetMethod("POST")
 	form.SetAction("/cropper_post")
 	form.AddHidden("result_type").SetValue("base64")
 	form.AddSubmit("vv").SetLabel("Submit")
 
-	line.Add(form)
+	line.AddComponent(form)
 	data.Components = append(data.Components, line)
 
 	// -
@@ -52,14 +53,14 @@ func Cropper(w http.ResponseWriter, r *http.Request) {
 	t1.SetLabel("geometry result")
 
 	form = components.NewForm()
-	form.Add(t1)
+	form.AddComponent(t1)
 
 	form.SetMethod("POST")
 	form.SetAction("/cropper_post")
 	form.AddHidden("result_type").SetValue("geometry")
 	form.AddSubmit("vv").SetLabel("Submit")
 
-	line.Add(form)
+	line.AddComponent(form)
 	data.Components = append(data.Components, line)
 
 	//- add an example to show how to manage the response on the server side

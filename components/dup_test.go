@@ -1,8 +1,9 @@
 package components_test
 
 import (
-	"github.com/mh-cbon/mdl-go-components/components"
 	"testing"
+
+	"github.com/mh-cbon/mdl-go-components/components"
 )
 
 func TestDup(t *testing.T) {
@@ -14,13 +15,13 @@ func TestDup(t *testing.T) {
 
 	bt := components.NewButton()
 	bt.SetLabel("hello bt!")
-	dup.Add(bt)
+	dup.AddComponent(bt)
 	bt = components.NewButton()
 	bt.SetLabel("hello bt2!")
-	dup.Add(bt)
+	dup.AddComponent(bt)
 	bt = components.NewButton()
 	bt.SetLabel("hello bt3!")
-	dup.Add(bt)
+	dup.AddComponent(bt)
 
 	bt = components.NewButton()
 	bt.SetLabel("hello duped bt!")
@@ -48,21 +49,21 @@ func TestDupSliceDuped(t *testing.T) {
 
 	bt := components.NewButton()
 	bt.SetLabel("hello bt!")
-	dup.Add(bt)
+	dup.AddComponent(bt)
 	bt = components.NewButton()
 	bt.SetLabel("hello bt2!")
-	dup.Add(bt)
+	dup.AddComponent(bt)
 	bt = components.NewButton()
 	bt.SetLabel("hello bt3!")
-	dup.Add(bt)
+	dup.AddComponent(bt)
 
 	sl := components.NewSlice()
 	txt := components.NewInputText()
 	txt.SetLabel("hello duped bt!")
-	sl.Add(txt)
+	sl.AddComponent(txt)
 	txt = components.NewInputText()
 	txt.SetLabel("hello duped bt!2")
-	sl.Add(txt)
+	sl.AddComponent(txt)
 	dup.SetDup(sl)
 
 	expectations := []string{

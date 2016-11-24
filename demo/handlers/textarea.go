@@ -1,9 +1,10 @@
 package handlers
 
 import (
+	"net/http"
+
 	mgc "github.com/mh-cbon/mdl-go-components"
 	"github.com/mh-cbon/mdl-go-components/components"
-	"net/http"
 )
 
 func Textarea(w http.ResponseWriter, r *http.Request) {
@@ -23,14 +24,14 @@ func Textarea(w http.ResponseWriter, r *http.Request) {
 	t1.SetName("textarea")
 	t1.SetLabel("textarea field")
 	t1.SetValue("text here")
-	line.Add(t1)
+	line.AddComponent(t1)
 
 	t1 = components.NewTextarea()
 	t1.SetName("textarea")
 	t1.SetLabel("textarea field")
 	t1.SetValue("text here")
 	t1.SetPlaceHolderOnly(true)
-	line.Add(t1)
+	line.AddComponent(t1)
 	data.Components = append(data.Components, line)
 
 	// -
@@ -40,14 +41,14 @@ func Textarea(w http.ResponseWriter, r *http.Request) {
 	t1.SetName("textarea")
 	t1.SetLabel("textarea field")
 	t1.SetValue("text here")
-	line.Add(t1)
+	line.AddComponent(t1)
 
 	t1 = components.NewWysiwyg()
 	t1.SetName("textarea")
 	t1.SetLabel("textarea field")
 	t1.SetValue("text here")
 	t1.SetPlaceHolderOnly(true)
-	line.Add(t1)
+	line.AddComponent(t1)
 	data.Components = append(data.Components, line)
 
 	// -

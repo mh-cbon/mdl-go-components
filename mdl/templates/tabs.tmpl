@@ -1,5 +1,5 @@
 {{define "mgc/tabs"}}
-  <div 
+  <div
     {{range .Component.Attr}}{{.SafeName}}="{{.Value}}" {{end}}
     class="mdl-tabs mdl-js-tabs mdl-js-ripple-effect  {{.Component.Classes.Render}}"
     >
@@ -22,7 +22,7 @@
       <div
         {{range .Attr}}{{.SafeName}}="{{.Value}}" {{end}}
         class="mdl-tabs__panel {{.Classes.Render}}">
-        {{.Content.Render}}
+        {{.Components.Render}}
       </div>
     {{end}}
 

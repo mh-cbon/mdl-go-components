@@ -2,20 +2,21 @@ package components
 
 import (
 	mgc "github.com/mh-cbon/mdl-go-components"
+	base "github.com/mh-cbon/mdl-go-components/components_common"
 )
 
 type Input struct {
 	mgc.ViewComponent
-	NodeType
-	NodeLabel
-	NodePlaceholder
-	NodeSingleValue
-	NodeSingleError
+	base.NodeType
+	base.NodeLabel
+	base.NodePlaceholder
+	base.NodeSingleValue
+	base.NodeSingleError
 
-	Attr         AttrList
-	Classes      ClassList
-	InputAttr    AttrList
-	InputClasses ClassList
+	Attr         base.AttrList
+	Classes      base.ClassList
+	InputAttr    base.AttrList
+	InputClasses base.ClassList
 }
 
 func NewInput() *Input {
@@ -43,9 +44,9 @@ func NewInputPassword() *Input {
 	return ret
 }
 
-func (view *Input) SetErrors(p ErrorProvider) {
+func (view *Input) SetErrors(p base.ErrorProvider) {
 	err := p.GetError(view.GetName())
-	if err!=nil {
+	if err != nil {
 		view.SetError(err)
 	}
 }

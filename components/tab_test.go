@@ -1,8 +1,9 @@
 package components_test
 
 import (
-	"github.com/mh-cbon/mdl-go-components/components"
 	"testing"
+
+	"github.com/mh-cbon/mdl-go-components/components"
 )
 
 func TestTab(t *testing.T) {
@@ -10,11 +11,11 @@ func TestTab(t *testing.T) {
 
 	text := components.NewText()
 	text.SetContent("hello content!")
-	tabs.Add("tab1", text)
+	tabs.AddTab("tab1").AddComponent(text)
 
 	text = components.NewText()
 	text.SetContent("hello content!")
-	tabs.Add("tab2", text)
+	tabs.AddTab("tab2").AddComponent(text)
 
 	expectations := []string{
 		`<div\s+id="rnd-2"\s+class="mdl-tabs mdl-js-tabs mdl-js-ripple-effect\s+"\s+>`,
@@ -31,11 +32,11 @@ func TestTabSetActive(t *testing.T) {
 
 	text := components.NewText()
 	text.SetContent("hello content!")
-	tabs.Add("tab1", text)
+	tabs.AddTab("tab1").AddComponent(text)
 
 	text = components.NewText()
 	text.SetContent("hello content!")
-	tabs.Add("tab2", text)
+	tabs.AddTab("tab2").AddComponent(text)
 
 	tabs.SetActive(1)
 

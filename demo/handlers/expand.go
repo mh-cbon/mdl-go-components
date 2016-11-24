@@ -1,9 +1,10 @@
 package handlers
 
 import (
+	"net/http"
+
 	mgc "github.com/mh-cbon/mdl-go-components"
 	"github.com/mh-cbon/mdl-go-components/components"
-	"net/http"
 )
 
 func Expand(w http.ResponseWriter, r *http.Request) {
@@ -39,8 +40,8 @@ func Expand(w http.ResponseWriter, r *http.Request) {
 	bt.GetOption().SetValue("valueopt")
 	bt.SetName("name")
 	t1.SetBt(bt)
-	t1.AddChild(child)
-	line.Add(t1)
+	t1.AddComponent(child)
+	line.AddComponent(t1)
 	data.Components = append(data.Components, line)
 
 	// -
@@ -53,8 +54,8 @@ func Expand(w http.ResponseWriter, r *http.Request) {
 	bt2.SetName("name")
 	bt2.SetChecked(true)
 	t1.SetBt(bt2)
-	t1.AddChild(child)
-	line.Add(t1)
+	t1.AddComponent(child)
+	line.AddComponent(t1)
 	data.Components = append(data.Components, line)
 
 	// -
@@ -64,8 +65,8 @@ func Expand(w http.ResponseWriter, r *http.Request) {
 	bt3 := components.NewText()
 	bt3.SetContent("Click me !")
 	t1.SetBt(bt3)
-	t1.AddChild(child)
-	line.Add(t1)
+	t1.AddComponent(child)
+	line.AddComponent(t1)
 	data.Components = append(data.Components, line)
 
 	// -

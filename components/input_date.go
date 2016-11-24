@@ -1,21 +1,23 @@
 package components
 
 import (
-	mgc "github.com/mh-cbon/mdl-go-components"
 	"time"
+
+	mgc "github.com/mh-cbon/mdl-go-components"
+	base "github.com/mh-cbon/mdl-go-components/components_common"
 )
 
 type InputDate struct {
 	mgc.ViewComponent
-	NodeLabel
-	NodePlaceholder
-	NodeSingleError
+	base.NodeLabel
+	base.NodePlaceholder
+	base.NodeSingleError
 
-	Attr         AttrList
-	Classes      ClassList
-	InputAttr    AttrList
-	InputClasses ClassList
-	HiddenAttr   AttrList
+	Attr         base.AttrList
+	Classes      base.ClassList
+	InputAttr    base.AttrList
+	InputClasses base.ClassList
+	HiddenAttr   base.AttrList
 
 	GoFormat string
 }
@@ -27,9 +29,9 @@ func NewInputDate() *InputDate {
 	return ret
 }
 
-func (view *InputDate) SetErrors(p ErrorProvider) {
+func (view *InputDate) SetErrors(p base.ErrorProvider) {
 	err := p.GetError(view.GetName())
-	if err!=nil {
+	if err != nil {
 		view.SetError(err)
 	}
 }
@@ -59,11 +61,11 @@ func (i *InputDate) SetDate(b time.Time) {
 	i.SetPresent(b)
 }
 func (i *InputDate) GetDate() (time.Time, error) {
-  d := i.GetPresent()
+	d := i.GetPresent()
 	return *d, nil
 }
 func (i *InputDate) MustGetDate() time.Time {
-  d := i.GetPresent()
+	d := i.GetPresent()
 	return *d
 }
 func (i *InputDate) SetPresent(b time.Time) {

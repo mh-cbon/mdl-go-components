@@ -2,17 +2,18 @@ package components
 
 import (
 	mgc "github.com/mh-cbon/mdl-go-components"
+	base "github.com/mh-cbon/mdl-go-components/components_common"
 )
 
 type Select struct {
 	mgc.ViewComponent
-	Node
-	NodeLabel
-	NodePlaceholder
-	NodeSingleError
-	NodeWithOptions
-	InputClasses ClassList
-	InputAttr    AttrList
+	base.Node
+	base.NodeLabel
+	base.NodePlaceholder
+	base.NodeSingleError
+	base.NodeWithOptions
+	InputClasses base.ClassList
+	InputAttr    base.AttrList
 	Multiple     bool
 	Icon         string
 }
@@ -23,9 +24,9 @@ func NewSelect() *Select {
 	return ret
 }
 
-func (view *Select) SetErrors(p ErrorProvider) {
+func (view *Select) SetErrors(p base.ErrorProvider) {
 	err := p.GetError(view.GetName())
-	if err!=nil {
+	if err != nil {
 		view.SetError(err)
 	}
 }
@@ -64,7 +65,7 @@ func (view *Select) UpdateWindowUrl(b bool) {
 	if b {
 		view.Classes.Add("custom-js-select-change-url")
 	} else {
-    view.Classes.Remove("custom-js-select-change-url")
+		view.Classes.Remove("custom-js-select-change-url")
 	}
 }
 
@@ -82,7 +83,7 @@ func (view *Select) GetId() string {
 	return view.InputAttr.GetValue("id")
 }
 
-func (view *Select) Translate(t Translator) {
+func (view *Select) Translate(t base.Translator) {
 	view.NodeLabel.Translate(t)
 	view.NodeWithOptions.Translate(t)
 }

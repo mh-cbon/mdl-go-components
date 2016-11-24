@@ -1,4 +1,4 @@
-{{define "mgc/component_expand"}}
+{{define "mgc/expand"}}
 <div class="custom-js-expander custom-expander
   {{if .Component.IsExpanded}}is-expanded{{end}}
   ">
@@ -8,7 +8,7 @@
   </div>
 
   <div class="custom-expander-container">
-    {{range .Component.Children}}
+    {{range .Component.GetComponents}}
       {{.Render}}
     {{end}}
   </div>

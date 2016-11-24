@@ -1,10 +1,11 @@
 package handlers
 
 import (
-	mgc "github.com/mh-cbon/mdl-go-components"
-	"github.com/mh-cbon/mdl-go-components/components"
 	"net/http"
 	"time"
+
+	mgc "github.com/mh-cbon/mdl-go-components"
+	"github.com/mh-cbon/mdl-go-components/components"
 )
 
 func InputDate(w http.ResponseWriter, r *http.Request) {
@@ -33,7 +34,7 @@ func InputDate(w http.ResponseWriter, r *http.Request) {
 	t1.SetPast(time.Now().Add(-8 * 24 * 365 * time.Hour).UTC())
 	t1.SetFuture(time.Now().Add(8 * 24 * 365 * time.Hour).UTC())
 
-	line.Add(t1)
+	line.AddComponent(t1)
 	data.Components = append(data.Components, line)
 
 	// -
@@ -52,7 +53,7 @@ func InputDate(w http.ResponseWriter, r *http.Request) {
 	t1.SetPast(time.Now().Add(-8 * 24 * 365 * time.Hour).UTC())
 	t1.SetFuture(time.Now().Add(8 * 24 * 365 * time.Hour).UTC())
 
-	line.Add(t1)
+	line.AddComponent(t1)
 	data.Components = append(data.Components, line)
 
 	// -

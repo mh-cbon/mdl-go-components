@@ -1,18 +1,20 @@
 package components
 
 import (
-	mgc "github.com/mh-cbon/mdl-go-components"
 	"strconv"
+
+	mgc "github.com/mh-cbon/mdl-go-components"
+	base "github.com/mh-cbon/mdl-go-components/components_common"
 )
 
 type InputSlice struct {
 	mgc.ViewComponent
-	Node
-	NodeType
-	NodeLabel
-	NodePlaceholder
-	NodeMutlipleValues
-	NodeSingleError
+	base.Node
+	base.NodeType
+	base.NodeLabel
+	base.NodePlaceholder
+	base.NodeMutlipleValues
+	base.NodeSingleError
 	ItemBlock string
 }
 
@@ -49,9 +51,9 @@ func (i *InputSlice) GetItemBlock() string {
 	return i.ItemBlock
 }
 
-func (view *InputSlice) SetErrors(p ErrorProvider) {
+func (view *InputSlice) SetErrors(p base.ErrorProvider) {
 	err := p.GetError(view.GetName())
-	if err!=nil {
+	if err != nil {
 		view.SetError(err)
 	}
 }

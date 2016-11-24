@@ -2,15 +2,16 @@ package components
 
 import (
 	mgc "github.com/mh-cbon/mdl-go-components"
+	base "github.com/mh-cbon/mdl-go-components/components_common"
 )
 
 type Textarea struct {
 	mgc.ViewComponent
-	Node
-	NodeLabel
-	NodePlaceholder
-	NodeSingleValue
-	NodeSingleError
+	base.Node
+	base.NodeLabel
+	base.NodePlaceholder
+	base.NodeSingleValue
+	base.NodeSingleError
 	Rows int
 }
 
@@ -25,6 +26,13 @@ func NewWysiwyg() *Textarea {
 	ret := NewTextarea()
 	ret.SetBlock("mgc/form_wysiwyg")
 	return ret
+}
+
+func (view *Textarea) SetErrors(p base.ErrorProvider) {
+	err := p.GetError(view.GetName())
+	if err != nil {
+		view.SetError(err)
+	}
 }
 
 func (i *Textarea) SetRows(b int) {

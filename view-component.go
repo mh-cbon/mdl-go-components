@@ -59,18 +59,23 @@ func (ctx *RenderContext) RenderComponent(view ViewComponentRenderer, args ...in
 	wr := ctx.GetWriter()
 	return "", tpl.ExecuteTemplate(wr, block, viewdata)
 }
-func (ctx *RenderContext) SetDefaultTo(view ViewComponentRenderer) {
+func (ctx *RenderContext) SetDefaultTo(view ViewComponentContextSetter) {
 	view.SetDefaultRenderContext(ctx)
 }
-func (ctx *RenderContext) AttachTo(view ViewComponentRenderer) {
+func (ctx *RenderContext) AttachTo(view ViewComponentContextSetter) {
 	view.SetRenderContext(ctx)
 }
 
 type ContextRenderer interface {
 	GetId() string
 	RenderComponent(view ViewComponentRenderer, args ...interface{}) (string, error)
-	SetDefaultTo(view ViewComponentRenderer)
-	AttachTo(view ViewComponentRenderer)
+	SetDefaultTo(view ViewComponentContextSetter)
+	AttachTo(view ViewComponentContextSetter)
+}
+
+type ViewComponentContextSetter interface {
+	SetDefaultRenderContext(r ContextRenderer)
+	SetRenderContext(r ContextRenderer)
 }
 
 type ViewComponentRenderer interface {

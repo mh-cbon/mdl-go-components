@@ -1,8 +1,9 @@
 package components_test
 
 import (
-	"github.com/mh-cbon/mdl-go-components/components"
 	"testing"
+
+	"github.com/mh-cbon/mdl-go-components/components"
 )
 
 func TestSlice(t *testing.T) {
@@ -11,11 +12,11 @@ func TestSlice(t *testing.T) {
 
 	text := components.NewText()
 	text.SetContent("hello content!")
-	slice.Add(text)
+	slice.AddComponent(text)
 
 	text = components.NewText()
 	text.SetContent("hello other content!")
-	slice.Add(text)
+	slice.AddComponent(text)
 
 	expectations := []string{
 		`\s+hello content!\s+hello other content!\s+`,

@@ -1,9 +1,10 @@
 package handlers
 
 import (
+	"net/http"
+
 	mgc "github.com/mh-cbon/mdl-go-components"
 	"github.com/mh-cbon/mdl-go-components/components"
-	"net/http"
 )
 
 func DataTable(w http.ResponseWriter, r *http.Request) {
@@ -46,7 +47,7 @@ func DataTable(w http.ResponseWriter, r *http.Request) {
 	row.SetCell("sku", "sku2")
 	row.SetCell("edit", "http://google.com")
 
-	line.Add(t1)
+	line.AddComponent(t1)
 	data.Components = append(data.Components, line)
 
 	// -
@@ -76,7 +77,7 @@ func DataTable(w http.ResponseWriter, r *http.Request) {
 	row.SetCell("sku", "sku2")
 	row.SetCell("edit", "http://google.com")
 
-	line.Add(t1)
+	line.AddComponent(t1)
 	data.Components = append(data.Components, line)
 
 	// -
@@ -115,7 +116,7 @@ func DataTable(w http.ResponseWriter, r *http.Request) {
 	row.SetCell("sku", "sku2")
 	row.SetCell("edit", "http://google.com")
 
-	line.Add(t1)
+	line.AddComponent(t1)
 
 	bt = components.NewButton()
 	bt.SetLabel("button")
@@ -123,7 +124,7 @@ func DataTable(w http.ResponseWriter, r *http.Request) {
 	bt.SetId("button1")
 	bt.Classes.Add("custom-js-confirm-button")
 	bt.Attr.Set("confirm", "#dialog")
-	line.Add(bt)
+	line.AddComponent(bt)
 
 	dialog = components.NewDialog()
 	dialog.SetTitle("The title")
@@ -136,7 +137,7 @@ func DataTable(w http.ResponseWriter, r *http.Request) {
 	text.SetContent("hello content!")
 	dialog.Content = text
 
-	line.Add(dialog)
+	line.AddComponent(dialog)
 
 	data.Components = append(data.Components, line)
 

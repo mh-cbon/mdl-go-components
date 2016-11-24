@@ -6,6 +6,7 @@ import (
 	"time"
 
 	mgc "github.com/mh-cbon/mdl-go-components"
+	base "github.com/mh-cbon/mdl-go-components/components_common"
 )
 
 type DataTable struct {
@@ -13,8 +14,8 @@ type DataTable struct {
 	Headers []*DataTableHeader
 	Rows    []*DataTableRow
 
-	Classes         ClassList
-	Attr            AttrList
+	Classes         base.ClassList
+	Attr            base.AttrList
 	BaseUrl         *url.URL
 	EnsureQueryArgs map[string]string
 	SortParamName   string
@@ -57,7 +58,7 @@ func (view *DataTable) Render(args ...interface{}) (string, error) {
 	return view.GetRenderContext().RenderComponent(view, args)
 }
 
-func (view *DataTable) Translate(t Translator) {
+func (view *DataTable) Translate(t base.Translator) {
 	for _, c := range view.Headers {
 		c.Translate(t)
 	}
@@ -170,8 +171,8 @@ func (l *DataTable) GetLinkIcon(name string) string {
 }
 
 type DataTableHeader struct {
-	Classes ClassList
-	Attr    AttrList
+	Classes base.ClassList
+	Attr    base.AttrList
 
 	BaseUrl         *url.URL
 	SortParamName   string
@@ -193,7 +194,7 @@ func (l *DataTableHeader) GetCellTxt() string {
 	return l.CellTxt
 }
 
-func (view *DataTableHeader) Translate(t Translator) {
+func (view *DataTableHeader) Translate(t base.Translator) {
 	view.SetCellTxt(t.T(view.GetCellTxt()))
 }
 
@@ -362,10 +363,10 @@ func (l *DataTableHeader) IsNumeric() bool {
 }
 
 type DataTableRow struct {
-	Classes ClassList
-	Attr    AttrList
+	Classes base.ClassList
+	Attr    base.AttrList
 
-	NodeSingleValue
+	base.NodeSingleValue
 	Cells []*DataTableCell
 }
 
@@ -402,8 +403,8 @@ func (l *DataTableRow) SetCellDate(name string, value time.Time) *DataTableRow {
 }
 
 type DataTableCell struct {
-	Classes ClassList
-	Attr    AttrList
+	Classes base.ClassList
+	Attr    base.AttrList
 
 	CellName string
 	CellTxt  string

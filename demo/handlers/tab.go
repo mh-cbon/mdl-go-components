@@ -1,9 +1,10 @@
 package handlers
 
 import (
+	"net/http"
+
 	mgc "github.com/mh-cbon/mdl-go-components"
 	"github.com/mh-cbon/mdl-go-components/components"
-	"net/http"
 )
 
 func Tab(w http.ResponseWriter, r *http.Request) {
@@ -28,7 +29,7 @@ func Tab(w http.ResponseWriter, r *http.Request) {
 	tx = components.NewText()
 	tx.SetContent("Hello from tab1!")
 
-	t1.Add("Hello tab", tx)
+	t1.AddTab("Hello tab").AddComponent(tx)
 
 	dt = components.NewDataTable()
 	header = dt.SetHeader("id", "id")
@@ -53,9 +54,9 @@ func Tab(w http.ResponseWriter, r *http.Request) {
 	row.SetCell("sku", "sku2")
 	row.SetCell("edit", "http://google.com")
 
-	t1.Add("Data table tab", dt)
+	t1.AddTab("Data table tab").AddComponent(dt)
 
-	line.Add(t1)
+	line.AddComponent(t1)
 	data.Components = append(data.Components, line)
 
 	// -

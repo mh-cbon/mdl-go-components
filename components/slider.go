@@ -2,19 +2,20 @@ package components
 
 import (
 	mgc "github.com/mh-cbon/mdl-go-components"
+	base "github.com/mh-cbon/mdl-go-components/components_common"
 )
 
 type Slider struct {
 	mgc.ViewComponent
-	NodeLabel
-	NodePlaceholder
-	NodeSingleValue
-	NodeSingleError
+	base.NodeLabel
+	base.NodePlaceholder
+	base.NodeSingleValue
+	base.NodeSingleError
 
-	Attr         AttrList
-	Classes      ClassList
-	InputAttr    AttrList
-	InputClasses ClassList
+	Attr         base.AttrList
+	Classes      base.ClassList
+	InputAttr    base.AttrList
+	InputClasses base.ClassList
 }
 
 func NewSlider() *Slider {
@@ -24,9 +25,9 @@ func NewSlider() *Slider {
 	return ret
 }
 
-func (view *Slider) SetErrors(p ErrorProvider) {
+func (view *Slider) SetErrors(p base.ErrorProvider) {
 	err := p.GetError(view.GetName())
-	if err!=nil {
+	if err != nil {
 		view.SetError(err)
 	}
 }

@@ -2,14 +2,15 @@ package components
 
 import (
 	mgc "github.com/mh-cbon/mdl-go-components"
+	base "github.com/mh-cbon/mdl-go-components/components_common"
 )
 
 type CheckIcon struct {
 	mgc.ViewComponent
-	Node
-	NodeWithOption
-	InputClasses ClassList
-	InputAttr    AttrList
+	base.Node
+	base.NodeWithOption
+	InputClasses base.ClassList
+	InputAttr    base.AttrList
 	Icon         string
 }
 

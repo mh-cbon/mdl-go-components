@@ -2,23 +2,24 @@ package components
 
 import (
 	mgc "github.com/mh-cbon/mdl-go-components"
+	base "github.com/mh-cbon/mdl-go-components/components_common"
 )
 
 type InputFile struct {
 	mgc.ViewComponent
-	NodeLabel
-	NodePlaceholder
-	NodeSingleError
+	base.NodeLabel
+	base.NodePlaceholder
+	base.NodeSingleError
 
-	Attr          AttrList
-	Classes       ClassList
-	InputAttr     AttrList
-	InputClasses  ClassList
-	InputFileAttr AttrList
+	Attr          base.AttrList
+	Classes       base.ClassList
+	InputAttr     base.AttrList
+	InputClasses  base.ClassList
+	InputFileAttr base.AttrList
 
 	InputTextValue string
-	AttachIcon string
-	ClearIcon  string
+	AttachIcon     string
+	ClearIcon      string
 }
 
 func NewInputFile() *InputFile {
@@ -31,9 +32,9 @@ func NewInputFile() *InputFile {
 	return view
 }
 
-func (view *InputFile) SetErrors(p ErrorProvider) {
+func (view *InputFile) SetErrors(p base.ErrorProvider) {
 	err := p.GetError(view.GetName())
-	if err!=nil {
+	if err != nil {
 		view.SetError(err)
 	}
 }
@@ -69,7 +70,7 @@ func (view *InputFile) SetInputTextValue(b string) {
 	view.InputTextValue = b
 }
 func (view *InputFile) SetInputTextName(b string) {
-  view.InputAttr.Set("name", b)
+	view.InputAttr.Set("name", b)
 }
 
 func (view *InputFile) SetMultiple(b bool) {

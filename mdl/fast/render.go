@@ -37,10 +37,10 @@ func (r *RenderContext) GetRenderer(block string) ComponentRenderer {
 	}
 	return nil
 }
-func (ctx *RenderContext) SetDefaultTo(view mgc.ViewComponentRenderer) {
+func (ctx *RenderContext) SetDefaultTo(view mgc.ViewComponentContextSetter) {
 	view.SetDefaultRenderContext(ctx)
 }
-func (ctx *RenderContext) AttachTo(view mgc.ViewComponentRenderer) {
+func (ctx *RenderContext) AttachTo(view mgc.ViewComponentContextSetter) {
 	view.SetRenderContext(ctx)
 }
 func (ctx *RenderContext) RenderComponent(view mgc.ViewComponentRenderer, args ...interface{}) (string, error) {

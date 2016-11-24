@@ -1,9 +1,10 @@
 package handlers
 
 import (
+	"net/http"
+
 	mgc "github.com/mh-cbon/mdl-go-components"
 	"github.com/mh-cbon/mdl-go-components/components"
-	"net/http"
 )
 
 func InputFile(w http.ResponseWriter, r *http.Request) {
@@ -21,7 +22,7 @@ func InputFile(w http.ResponseWriter, r *http.Request) {
 	t1 = components.NewInputFile()
 	t1.SetName("the_file")
 	t1.SetLabel("Choose a file")
-	line.Add(t1)
+	line.AddComponent(t1)
 	data.Components = append(data.Components, line)
 
 	// -
@@ -30,7 +31,7 @@ func InputFile(w http.ResponseWriter, r *http.Request) {
 	t1.SetName("the_file")
 	t1.SetLabel("Choose a file")
 	t1.SetMultiple(true)
-	line.Add(t1)
+	line.AddComponent(t1)
 	data.Components = append(data.Components, line)
 
 	// -
@@ -41,7 +42,7 @@ func InputFile(w http.ResponseWriter, r *http.Request) {
 	t1.SetError("it gone south :x")
 	t1.SetClearIcon("delete_forever")
 	t1.SetAttachIcon("account_box")
-	line.Add(t1)
+	line.AddComponent(t1)
 	data.Components = append(data.Components, line)
 
 	// -

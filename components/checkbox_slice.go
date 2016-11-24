@@ -1,19 +1,21 @@
 package components
 
 import (
-	mgc "github.com/mh-cbon/mdl-go-components"
 	"strconv"
+
+	mgc "github.com/mh-cbon/mdl-go-components"
+	base "github.com/mh-cbon/mdl-go-components/components_common"
 )
 
 type CheckboxSlice struct {
 	mgc.ViewComponent
-	Node
-	NodeType
-	NodeMutlipleValues
-	NodeWithOptions
-	NodeSingleError
-	InputClasses ClassList
-	InputAttr    AttrList
+	base.Node
+	base.NodeType
+	base.NodeMutlipleValues
+	base.NodeWithOptions
+	base.NodeSingleError
+	InputClasses base.ClassList
+	InputAttr    base.AttrList
 	ItemBlock    string
 }
 
@@ -32,9 +34,9 @@ func NewRadioSlice() *CheckboxSlice {
 	return ret
 }
 
-func (view *CheckboxSlice) SetErrors(p ErrorProvider) {
+func (view *CheckboxSlice) SetErrors(p base.ErrorProvider) {
 	err := p.GetError(view.GetName())
-	if err!=nil {
+	if err != nil {
 		view.SetError(err)
 	}
 }
@@ -66,7 +68,7 @@ func (view *CheckboxSlice) SetValue(s string) {
 	view.NodeWithOptions.SetValue(s)
 }
 
-func (view *CheckboxSlice) GetItem(index int, option NodeOption) *Checkbox {
+func (view *CheckboxSlice) GetItem(index int, option base.NodeOption) *Checkbox {
 	sview := NewCheckbox()
 	sview.Attr.MergeFrom(view.Attr)
 	sview.Classes.MergeFrom(view.Classes)
@@ -81,7 +83,7 @@ func (view *CheckboxSlice) GetItem(index int, option NodeOption) *Checkbox {
 	return sview
 }
 
-func (view *CheckboxSlice) RenderItem(index int, option NodeOption, args ...interface{}) (string, error) {
+func (view *CheckboxSlice) RenderItem(index int, option base.NodeOption, args ...interface{}) (string, error) {
 	return view.GetItem(index, option).Render(args)
 }
 

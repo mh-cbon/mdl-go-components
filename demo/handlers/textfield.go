@@ -1,9 +1,10 @@
 package handlers
 
 import (
+	"net/http"
+
 	mgc "github.com/mh-cbon/mdl-go-components"
 	"github.com/mh-cbon/mdl-go-components/components"
-	"net/http"
 )
 
 func Textfield(w http.ResponseWriter, r *http.Request) {
@@ -23,14 +24,14 @@ func Textfield(w http.ResponseWriter, r *http.Request) {
 	t1.SetLabel("textfield empty")
 	t1.SetName("textfield1")
 	t1.SetPlaceHolderOnly(true)
-	line.Add(t1)
+	line.AddComponent(t1)
 
 	t1 = components.NewInputText()
 	t1.SetLabel("textfield with value")
 	t1.SetName("textfield1")
 	t1.SetValue("some\">")
 	t1.SetPlaceHolderOnly(true)
-	line.Add(t1)
+	line.AddComponent(t1)
 
 	t1 = components.NewInputText()
 	t1.SetLabel("textfield with value and error")
@@ -38,7 +39,7 @@ func Textfield(w http.ResponseWriter, r *http.Request) {
 	t1.SetValue("some")
 	t1.SetError("an error")
 	t1.SetPlaceHolderOnly(true)
-	line.Add(t1)
+	line.AddComponent(t1)
 
 	data.Components = append(data.Components, line)
 
@@ -48,20 +49,20 @@ func Textfield(w http.ResponseWriter, r *http.Request) {
 	t1 = components.NewInputText()
 	t1.SetLabel("textfield empty")
 	t1.SetName("textfield1")
-	line.Add(t1)
+	line.AddComponent(t1)
 
 	t1 = components.NewInputText()
 	t1.SetLabel("textfield with value")
 	t1.SetName("textfield1")
 	t1.SetValue("some")
-	line.Add(t1)
+	line.AddComponent(t1)
 
 	t1 = components.NewInputText()
 	t1.SetLabel("textfield with value and error")
 	t1.SetName("textfield1")
 	t1.SetValue("some")
 	t1.SetError("an error")
-	line.Add(t1)
+	line.AddComponent(t1)
 
 	data.Components = append(data.Components, line)
 
@@ -71,20 +72,20 @@ func Textfield(w http.ResponseWriter, r *http.Request) {
 	t1 = components.NewInputPassword()
 	t1.SetLabel("password empty")
 	t1.SetName("textfield1")
-	line.Add(t1)
+	line.AddComponent(t1)
 
 	t1 = components.NewInputPassword()
 	t1.SetLabel("password with value")
 	t1.SetName("textfield1")
 	t1.SetValue("some")
-	line.Add(t1)
+	line.AddComponent(t1)
 
 	t1 = components.NewInputPassword()
 	t1.SetLabel("password with value and error")
 	t1.SetName("textfield1")
 	t1.SetValue("some")
 	t1.SetError("an error")
-	line.Add(t1)
+	line.AddComponent(t1)
 
 	data.Components = append(data.Components, line)
 

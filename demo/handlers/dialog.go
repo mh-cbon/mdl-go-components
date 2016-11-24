@@ -1,9 +1,10 @@
 package handlers
 
 import (
+	"net/http"
+
 	mgc "github.com/mh-cbon/mdl-go-components"
 	"github.com/mh-cbon/mdl-go-components/components"
-	"net/http"
 )
 
 func Dialog(w http.ResponseWriter, r *http.Request) {
@@ -33,14 +34,14 @@ func Dialog(w http.ResponseWriter, r *http.Request) {
 	t1.Ok.Attr.Set("form", "form1")
 
 	t1.Content = text
-	line.Add(t1)
+	line.AddComponent(t1)
 
 	bt = components.NewButton()
 	bt.SetLabel("button")
 	bt.SetName("button1")
 	bt.Classes.Add("custom-js-confirm-button")
 	bt.Attr.Set("confirm", "#"+t1.GetId())
-	line.Add(bt)
+	line.AddComponent(bt)
 
 	data.Components = append(data.Components, line)
 
@@ -54,14 +55,14 @@ func Dialog(w http.ResponseWriter, r *http.Request) {
 	t1.Ok.SetLink("https://google.com/")
 
 	t1.Content = text
-	line.Add(t1)
+	line.AddComponent(t1)
 
 	bt = components.NewButton()
 	bt.SetLabel("button")
 	bt.SetName("button1")
 	bt.Classes.Add("custom-js-confirm-button")
 	bt.Attr.Set("confirm", "#"+t1.GetId())
-	line.Add(bt)
+	line.AddComponent(bt)
 
 	data.Components = append(data.Components, line)
 
@@ -76,12 +77,12 @@ func Dialog(w http.ResponseWriter, r *http.Request) {
 	t1.Ok.Attr.Set("form", "form1")
 
 	t1.Content = text
-	line.Add(t1)
+	line.AddComponent(t1)
 
 	link = components.NewText()
 	link.SetHTMLContent(`
     <a href="#" class="custom-js-confirm-button" confirm="#` + t1.GetId() + `">click it</a>`)
-	line.Add(link)
+	line.AddComponent(link)
 
 	data.Components = append(data.Components, line)
 

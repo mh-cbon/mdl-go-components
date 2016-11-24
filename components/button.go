@@ -2,14 +2,15 @@ package components
 
 import (
 	mgc "github.com/mh-cbon/mdl-go-components"
+	base "github.com/mh-cbon/mdl-go-components/components_common"
 )
 
 type Button struct {
 	mgc.ViewComponent
-	Node
-	NodeType
-	NodeLabel
-	NodeSingleValue
+	base.Node
+	base.NodeType
+	base.NodeLabel
+	base.NodeSingleValue
 
 	Link string
 }
@@ -34,7 +35,7 @@ func (view *Button) SetLink(b string) *Button {
 	} else {
 		view.Attr.Set("href", b)
 	}
-  return view
+	return view
 }
 
 func (view *Button) SetTarget(b string) *Button {
@@ -43,7 +44,7 @@ func (view *Button) SetTarget(b string) *Button {
 	} else {
 		view.Attr.Set("target", b)
 	}
-  return view
+	return view
 }
 
 func (view *Button) SetFormId(b string) *Button {
@@ -54,7 +55,7 @@ func (view *Button) SetFormId(b string) *Button {
 		view.Attr.Set("form", b)
 		view.SetType("submit")
 	}
-  return view
+	return view
 }
 
 func (view *Button) SetConfirmDialogId(b string) *Button {
@@ -65,36 +66,36 @@ func (view *Button) SetConfirmDialogId(b string) *Button {
 		view.Attr.Set("confirm", "#"+b)
 		view.Classes.Add("custom-js-confirm-button")
 	}
-  return view
+	return view
 }
 
 func (view *Button) SetIcon(b string) *Button {
-  if b == "" {
-    view.SetLabel("")
-    view.Classes.Remove("mdl-button--icon")
-  } else {
-    view.SetSafeLabel("<i class='material-icons'>" + b + "</i>")
-    view.Classes.Add("mdl-button--icon")
-  }
-  return view
+	if b == "" {
+		view.SetLabel("")
+		view.Classes.Remove("mdl-button--icon")
+	} else {
+		view.SetSafeLabel("<i class='material-icons'>" + b + "</i>")
+		view.Classes.Add("mdl-button--icon")
+	}
+	return view
 }
 
 func (view *Button) SetRounded(b string) *Button {
-  if b == "" {
-    view.Classes.Remove("mdl-button--fab")
-  } else {
-    view.Classes.Add("mdl-button--fab")
-  }
-  return view
+	if b == "" {
+		view.Classes.Remove("mdl-button--fab")
+	} else {
+		view.Classes.Add("mdl-button--fab")
+	}
+	return view
 }
 
 func (view *Button) SetMiniRounded(b string) *Button {
-  if b == "" {
-    view.Classes.Remove("mdl-button--mini-fab")
-  } else {
-    view.Classes.Add("mdl-button--mini-fab")
-  }
-  return view
+	if b == "" {
+		view.Classes.Remove("mdl-button--mini-fab")
+	} else {
+		view.Classes.Add("mdl-button--mini-fab")
+	}
+	return view
 }
 
 func (view *Button) SetRipple(b bool) *Button {
@@ -103,7 +104,7 @@ func (view *Button) SetRipple(b bool) *Button {
 	} else {
 		view.Classes.Remove("mdl-js-ripple-effect")
 	}
-  return view
+	return view
 }
 
 func (view *Button) SetDisabled(b bool) *Button {
@@ -112,11 +113,11 @@ func (view *Button) SetDisabled(b bool) *Button {
 	} else {
 		view.Attr.Remove("disabled")
 	}
-  return view
+	return view
 }
 
 func (view *Button) IsDisabled() bool {
-  return view.Attr.GetValue("disabled")=="disabled"
+	return view.Attr.GetValue("disabled") == "disabled"
 }
 
 func (view *Button) SetRaised(b bool) *Button {
@@ -125,7 +126,7 @@ func (view *Button) SetRaised(b bool) *Button {
 	} else {
 		view.Classes.Remove("mdl-button--raised")
 	}
-  return view
+	return view
 }
 
 func (view *Button) SetColored(b bool) *Button {
@@ -134,7 +135,7 @@ func (view *Button) SetColored(b bool) *Button {
 	} else {
 		view.Classes.Remove("mdl-button--colored")
 	}
-  return view
+	return view
 }
 
 func (view *Button) SetAccentColored(b bool) *Button {
@@ -143,7 +144,7 @@ func (view *Button) SetAccentColored(b bool) *Button {
 	} else {
 		view.Classes.Remove("mdl-button--accent")
 	}
-  return view
+	return view
 }
 
 func (view *Button) Render(args ...interface{}) (string, error) {
