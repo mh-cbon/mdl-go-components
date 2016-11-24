@@ -61,6 +61,6 @@ func TestButtonHref(t *testing.T) {
 	// }
 	fastRenderer := fast.NewRenderContext(mgc.MustTemplate(), os.Stdout)
 	fastRenderer.Register(fast.NewButtonRenderer())
-	fastRenderer.AttachTo(buttonB)
-	buttonB.Render()
+	fastRenderer.AttachTo(input)
+	input.Render()
 }

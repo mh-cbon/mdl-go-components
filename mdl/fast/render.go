@@ -79,7 +79,7 @@ func (b *ButtonRenderer) RenderComponent(wr io.Writer, view mgc.ViewComponentRen
 		}
 
 		for _, v := range button.Attr {
-			wr.Write([]byte(html.EscapeString(v.Name) + "='" + html.EscapeString(v.Value) + "'"))
+			wr.Write([]byte(html.EscapeString(v.Name) + "='" + html.EscapeString(v.Value) + "' "))
 		}
 		wr.Write([]byte("class='" + html.EscapeString(button.Classes.Render()) + "'"))
 		if button.Attr.Has("value") {
