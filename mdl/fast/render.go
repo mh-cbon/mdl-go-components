@@ -85,7 +85,7 @@ func (b *ButtonRenderer) RenderComponent(wr io.Writer, view mgc.ViewComponentRen
 
 		io.WriteString(wr, "class='"+html.EscapeString(button.Classes.Render())+"'")
 
-		if button.Attr.Has("value") {
+		if button.GetValue() != "" {
 			io.WriteString(wr, "value='"+html.EscapeString(button.GetValue())+"'")
 		}
 		io.WriteString(wr, ">")
