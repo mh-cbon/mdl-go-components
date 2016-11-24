@@ -67,41 +67,35 @@ func (b *ButtonRenderer) RenderComponent(wr io.Writer, view mgc.ViewComponentRen
 	if button, ok := view.(*components.Button); !ok {
 		return "", errors.New("wrong type expected components.Button")
 	} else {
-		//EscapeString
+
+		tag := "button"
 		if button.Attr.Has("href") {
 			if button.Attr.Has("disabled") {
-				wr.Write([]byte("<span "))
+				tag = "span"
 			} else {
-				wr.Write([]byte("<a "))
+				tag = "a"
 			}
-		} else {
-			wr.Write([]byte("<button "))
 		}
+
+		io.WriteString(wr, "<"+tag+" ")
 
 		for _, v := range button.Attr {
-			wr.Write([]byte(html.EscapeString(v.Name) + "='" + html.EscapeString(v.Value) + "' "))
+			io.WriteString(wr, html.EscapeString(v.Name)+"='"+html.EscapeString(v.Value)+"' ")
 		}
-		wr.Write([]byte("class='" + html.EscapeString(button.Classes.Render()) + "'"))
+
+		io.WriteString(wr, "class='"+html.EscapeString(button.Classes.Render())+"'")
+
 		if button.Attr.Has("value") {
-			wr.Write([]byte("value='" + html.EscapeString(button.GetValue()) + "'"))
+			io.WriteString(wr, "value='"+html.EscapeString(button.GetValue())+"'")
 		}
-		wr.Write([]byte(">"))
+		io.WriteString(wr, ">")
 
 		if s, ok := button.GetLabel().(string); ok {
-			wr.Write([]byte(html.EscapeString(s)))
+			io.WriteString(wr, html.EscapeString(s))
 		} else if s, ok := button.GetLabel().(template.HTML); ok {
-			wr.Write([]byte(string(s)))
+			io.WriteString(wr, string(s))
 		}
-
-		if button.Attr.Has("href") {
-			if button.Attr.Has("disabled") {
-				wr.Write([]byte("</span>"))
-			} else {
-				wr.Write([]byte("</a>"))
-			}
-		} else {
-			wr.Write([]byte("</button>"))
-		}
+		io.WriteString(wr, "</"+tag+">")
 	}
 	return "", nil
 }
