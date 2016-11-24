@@ -65,11 +65,11 @@ func (view *Form) GetTarget() string {
 func (view *Form) Get(name string) mgc.ViewComponentRenderer {
 	for _, c := range view.Components {
 		if v, ok := c.(Namer); ok {
-			if v.GetName()==name {
-        r := view.GetRenderContext()
-        if r != nil {
-      		r.SetDefaultTo(c)
-        }
+			if v.GetName() == name {
+				r := view.GetRenderContext()
+				if r != nil {
+					r.SetDefaultTo(c)
+				}
 				return c
 			}
 		}
@@ -78,7 +78,7 @@ func (view *Form) Get(name string) mgc.ViewComponentRenderer {
 }
 func (view *Form) GetText(name string) *Input {
 	c := view.Get(name)
-	if c !=nil {
+	if c != nil {
 		if v, ok := c.(*Input); ok {
 			return v
 		}
@@ -93,7 +93,7 @@ func (view *Form) GetPassword(name string) *Input {
 }
 func (view *Form) GetSelect(name string) *Select {
 	c := view.Get(name)
-	if c !=nil {
+	if c != nil {
 		if v, ok := c.(*Select); ok {
 			return v
 		}
@@ -102,7 +102,7 @@ func (view *Form) GetSelect(name string) *Select {
 }
 func (view *Form) GetValueSetter(name string) ValueSetter {
 	c := view.Get(name)
-	if c !=nil {
+	if c != nil {
 		if v, ok := c.(ValueSetter); ok {
 			return v
 		}
@@ -111,7 +111,7 @@ func (view *Form) GetValueSetter(name string) ValueSetter {
 }
 func (view *Form) GetValueDateSetter(name string) ValueDateSetter {
 	c := view.Get(name)
-	if c !=nil {
+	if c != nil {
 		if v, ok := c.(ValueDateSetter); ok {
 			return v
 		}
@@ -120,7 +120,7 @@ func (view *Form) GetValueDateSetter(name string) ValueDateSetter {
 }
 func (view *Form) GetValueSliceSetter(name string) ValueSliceSetter {
 	c := view.Get(name)
-	if c !=nil {
+	if c != nil {
 		if v, ok := c.(ValueSliceSetter); ok {
 			return v
 		}
@@ -129,8 +129,17 @@ func (view *Form) GetValueSliceSetter(name string) ValueSliceSetter {
 }
 func (view *Form) GetButton(name string) *Button {
 	c := view.Get(name)
-	if c !=nil {
+	if c != nil {
 		if v, ok := c.(*Button); ok {
+			return v
+		}
+	}
+	return nil
+}
+func (view *Form) GetChipAutocomplete(name string) *ChipAutocomplete {
+	c := view.Get(name)
+	if c != nil {
+		if v, ok := c.(*ChipAutocomplete); ok {
 			return v
 		}
 	}
