@@ -3,8 +3,8 @@ package components
 import (
 	"html/template"
 	"strconv"
-	"time"
 	"strings"
+	"time"
 )
 
 type Translator interface {
@@ -25,18 +25,18 @@ type ValueSetter interface {
 }
 type ValueDateSetter interface {
 	SetDate(s time.Time)
-  GetDate() (time.Time, error)
-  MustGetDate() time.Time
+	GetDate() (time.Time, error)
+	MustGetDate() time.Time
 }
 type ValueSliceSetter interface {
 	SetValues(s []string)
 }
 type ErrorProvider interface {
-  // GetFailure() interface{}
-  GetError(name string) interface{}
+	// GetFailure() interface{}
+	GetError(name string) interface{}
 }
 type NodeErrorsSetter interface {
-  SetErrors(provider ErrorProvider)
+	SetErrors(provider ErrorProvider)
 }
 
 type ClassList []string
@@ -102,7 +102,7 @@ func (c *ClassList) MergeFrom(some ClassList) {
 		c.Add(v)
 	}
 }
-func (c *ClassList) Render() interface{} {
+func (c *ClassList) Render() string {
 	ret := ""
 	for _, v := range *c {
 		ret += v + " "
@@ -240,10 +240,10 @@ func (i *NodeSingleValue) GetDate() (time.Time, error) {
 	return time.Parse(time.RFC3339, i.GetValue())
 }
 func (i *NodeSingleValue) MustGetDate() time.Time {
-  t, err := time.Parse(time.RFC3339, i.GetValue())
-  if err !=nil{
-    panic(err)
-  }
+	t, err := time.Parse(time.RFC3339, i.GetValue())
+	if err != nil {
+		panic(err)
+	}
 	return t
 }
 
@@ -280,7 +280,7 @@ func (i *NodeWithOption) GetOption() *NodeOption {
 	return &i.Option
 }
 func (i *NodeWithOption) Translate(t Translator) {
-  i.Option.Translate(t)
+	i.Option.Translate(t)
 }
 
 type NodeWithOptions struct {
@@ -331,7 +331,7 @@ func (i *NodeWithOptions) SetUint64Value(value uint64) {
 	i.SetValue(strconv.FormatUint(value, 10))
 }
 func (i *NodeWithOptions) Translate(t Translator) {
-  for _, v := range i.Options {
+	for _, v := range i.Options {
 		v.Translate(t)
 	}
 }
@@ -349,6 +349,7 @@ func (i *NodeOption) Eq(s string) bool {
 type NodeSingleError struct {
 	Error interface{}
 }
+
 func (i *NodeSingleError) SetError(s interface{}) {
 	i.Error = s
 }
@@ -370,11 +371,11 @@ func (i *NodeLabel) GetLabel() interface{} {
 	return i.Label
 }
 func (i *NodeLabel) Translate(t Translator) {
-  if x, ok := i.Label.(template.HTML); ok {
-    i.SetSafeLabel(t.T(string(x)))
-  } else if x, ok := i.Label.(string); ok {
-    i.SetLabel(t.T(x))
-  }
+	if x, ok := i.Label.(template.HTML); ok {
+		i.SetSafeLabel(t.T(string(x)))
+	} else if x, ok := i.Label.(string); ok {
+		i.SetLabel(t.T(x))
+	}
 }
 
 type NodePlaceholder struct {
