@@ -1,10 +1,11 @@
 package components
 
 import (
-	mgc "github.com/mh-cbon/mdl-go-components"
-	"time"
 	"net/url"
 	"strconv"
+	"time"
+
+	mgc "github.com/mh-cbon/mdl-go-components"
 )
 
 type DataTable struct {
@@ -12,11 +13,11 @@ type DataTable struct {
 	Headers []*DataTableHeader
 	Rows    []*DataTableRow
 
-	Classes ClassList
-	Attr    AttrList
-	BaseUrl *url.URL
+	Classes         ClassList
+	Attr            AttrList
+	BaseUrl         *url.URL
 	EnsureQueryArgs map[string]string
-	SortParamName string
+	SortParamName   string
 
 	Empty mgc.ViewComponentRenderer
 
@@ -31,16 +32,16 @@ func NewDataTable() *DataTable {
 func (view *DataTable) Render(args ...interface{}) (string, error) {
 	if k := view.GetSortIcon(); k != "" {
 		for _, header := range view.Headers {
-      if header.IsSortable() {
-  			header.SetSortIcon(k)
-				if view.BaseUrl!=nil {
-	        u := *view.BaseUrl
-	  			header.SetBaseUrl(&u)
-	  			header.SetSortParamName(view.SortParamName)
-	  			header.SetEnsureArgs(view.EnsureQueryArgs)
-	        header.SetSortdir(header.GuessSortdir())
+			if header.IsSortable() {
+				header.SetSortIcon(k)
+				if view.BaseUrl != nil {
+					u := *view.BaseUrl
+					header.SetBaseUrl(&u)
+					header.SetSortParamName(view.SortParamName)
+					header.SetEnsureArgs(view.EnsureQueryArgs)
+					header.SetSortdir(header.GuessSortdir())
 				}
-      }
+			}
 		}
 	}
 	for _, row := range view.Rows {
@@ -172,8 +173,8 @@ type DataTableHeader struct {
 	Classes ClassList
 	Attr    AttrList
 
-	BaseUrl *url.URL
-	SortParamName string
+	BaseUrl         *url.URL
+	SortParamName   string
 	EnsureQueryArgs map[string]string
 
 	CellName string
@@ -270,21 +271,21 @@ func (l *DataTableHeader) GetSortdir() string {
 	return ""
 }
 func (l *DataTableHeader) GuessSortdir() string {
-  if l.BaseUrl!=nil {
-    q := l.BaseUrl.Query()
-    if values, ok := q[l.SortParamName]; ok {
-      for _, v := range values {
-        k := len(l.GetCellName())
-        if len(v)>k && v[0:k]==l.GetCellName() {
-          if v[k+1:]=="asc" {
-            return "asc"
-          } else if v[k+1:]=="desc"{
-            return "desc"
-          }
-        }
-      }
-    }
-  }
+	if l.BaseUrl != nil {
+		q := l.BaseUrl.Query()
+		if values, ok := q[l.SortParamName]; ok {
+			for _, v := range values {
+				k := len(l.GetCellName())
+				if len(v) > k && v[0:k] == l.GetCellName() {
+					if v[k+1:] == "asc" {
+						return "asc"
+					} else if v[k+1:] == "desc" {
+						return "desc"
+					}
+				}
+			}
+		}
+	}
 	return ""
 }
 func (l *DataTableHeader) GetNextSortdir() string {
@@ -297,39 +298,39 @@ func (l *DataTableHeader) GetNextSortdir() string {
 	return ""
 }
 func (l *DataTableHeader) GetSortHref() string {
-  if l.BaseUrl!=nil {
-    q := l.BaseUrl.Query()
-    s := l.GetNextSortdir()
-    if values, ok := q[l.SortParamName]; !ok {
-      if s!="" {
-        q.Set(l.SortParamName, l.GetCellName()+"-"+s)
-      }
-    } else {
-      f := false
-      for i, v := range values {
-        k := len(l.GetCellName())
-        if len(v)>k && v[0:k]==l.GetCellName() {
-          if s=="" {
-            values = append(values[:i], values[i+1:]...)
-          } else {
-            values[i] = l.GetCellName()+"-"+s
-          }
-          f = true
-          break
-        }
-      }
-      if !f {
-        values = append(values, l.GetCellName()+"-asc")
-      }
-      q[l.SortParamName] = values
-    }
-    for k, v := range l.EnsureQueryArgs {
-      q.Set(k, v)
-    }
-  	l.BaseUrl.RawQuery = q.Encode()
-  	return l.BaseUrl.String()
-  }
-  return ""
+	if l.BaseUrl != nil {
+		q := l.BaseUrl.Query()
+		s := l.GetNextSortdir()
+		if values, ok := q[l.SortParamName]; !ok {
+			if s != "" {
+				q.Set(l.SortParamName, l.GetCellName()+"-"+s)
+			}
+		} else {
+			f := false
+			for i, v := range values {
+				k := len(l.GetCellName())
+				if len(v) > k && v[0:k] == l.GetCellName() {
+					if s == "" {
+						values = append(values[:i], values[i+1:]...)
+					} else {
+						values[i] = l.GetCellName() + "-" + s
+					}
+					f = true
+					break
+				}
+			}
+			if !f {
+				values = append(values, l.GetCellName()+"-asc")
+			}
+			q[l.SortParamName] = values
+		}
+		for k, v := range l.EnsureQueryArgs {
+			q.Set(k, v)
+		}
+		l.BaseUrl.RawQuery = q.Encode()
+		return l.BaseUrl.String()
+	}
+	return ""
 }
 
 func (l *DataTableHeader) SetSortIcon(icon string) *DataTableHeader {
@@ -395,6 +396,9 @@ func (l *DataTableRow) SetCell(name string, value string) *DataTableRow {
 }
 func (l *DataTableRow) SetCellInt64(name string, value int64) *DataTableRow {
 	return l.SetCell(name, strconv.FormatInt(value, 10))
+}
+func (l *DataTableRow) SetCellDate(name string, value time.Time) *DataTableRow {
+	return l.SetCell(name, value.Format("Mon Jan 02"))
 }
 
 type DataTableCell struct {
