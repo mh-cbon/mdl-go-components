@@ -61,3 +61,7 @@ func Example_main() {
   // mgc.ViewComponentRenderer see tabs, dup, form ect.
 }
 ```
+
+## Performance
+
+troubled by `html/template` performance ? [Check this out :D](https://github.com/mh-cbon/mdl-go-components/tree/master/mdl/fast)
