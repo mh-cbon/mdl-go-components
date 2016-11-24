@@ -34,14 +34,14 @@ func init() {
 func BenchmarkRenderWithTemplate(b *testing.B) {
 	for n := 0; n < b.N; n++ {
 		buttonA.Render()
-		(tplBuffer).Reset()
+		// (tplBuffer).Reset()
 	}
 }
 
 func BenchmarkRenderWithFast(b *testing.B) {
 	for n := 0; n < b.N; n++ {
 		buttonB.Render()
-		(fastBuffer).Reset()
+		// (fastBuffer).Reset()
 	}
 }
 
