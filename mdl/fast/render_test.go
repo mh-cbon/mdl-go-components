@@ -50,6 +50,7 @@ func TestButtonHref(t *testing.T) {
 	input.SetLabel("label")
 	input.SetName("name")
 	input.SetId("id")
+	input.Attr.Set("tomate", "alert('hello');")
 	input.SetLink("http://whatever")
 
 	// expectations := []string{
