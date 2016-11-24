@@ -64,4 +64,4 @@ func Example_main() {
 
 ## Performance
 
-troubled by `html/template` performance ? [Check this out :D](https://github.com/mh-cbon/mdl-go-components/tree/master/mdl/fast)
+troubled by `html/template` performance ? [Check this out](https://github.com/mh-cbon/mdl-go-components/tree/master/mdl/fast) :D
